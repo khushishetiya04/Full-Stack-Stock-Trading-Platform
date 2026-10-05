@@ -13,121 +13,73 @@ function Footer() {
           </div>
           <div className="col">
             <p>Company</p>
-            <a
-              href=""
-              className="footer-link"
-            >
+            <a href="" className="footer-link">
               About
             </a>
             <br />
-            <a
-              href=""
-              className="footer-link"
-            >
+            <a href="" className="footer-link">
               Products
             </a>
             <br />
-            <a
-              href=""
-              className="footer-link"
-            >
+            <a href="" className="footer-link">
               Pricing
             </a>
             <br />
-            <a
-              href=""
-              className="footer-link"
-            >
+            <a href="" className="footer-link">
               Referral programme
             </a>
             <br />
-            <a
-              href=""
-              className="footer-link"
-            >
+            <a href="" className="footer-link">
               Careers
             </a>
             <br />
-            <a
-              href=""
-              className="footer-link"
-            >
+            <a href="" className="footer-link">
               Zerodha.tech
             </a>
             <br />
-            <a
-              href=""
-              className="footer-link"
-            >
+            <a href="" className="footer-link">
               Press & media
             </a>
             <br />
-            <a
-              href=""
-              className="footer-link"
-            >
+            <a href="" className="footer-link">
               Zerodha cares (CSR)
             </a>
             <br />
           </div>
           <div className="col">
             <p>Support</p>
-            <a
-              href=""
-              className="footer-link"
-            >
+            <a href="" className="footer-link">
               Contact
             </a>
             <br />
-            <a
-              href=""
-              className="footer-link"
-            >
+            <a href="" className="footer-link">
               Support portal
             </a>
             <br />
-            <a
-              href=""
-              className="footer-link"
-            >
+            <a href="" className="footer-link">
               Z-Connect blog
             </a>
             <br />
-            <a
-              href=""
-              className="footer-link"
-            >
+            <a href="" className="footer-link">
               List of charges
             </a>
             <br />
-            <a
-              href=""
-              className="footer-link"
-            >
+            <a href="" className="footer-link">
               Downloads & resources
             </a>
             <br />
           </div>
           <div className="col">
             <p>Account</p>
-            <a
-              href=""
-              className="footer-link"
-            >
+            <a href="" className="footer-link">
               Open an account
             </a>
             <br />
-            <a
-              href=""
-              className="footer-link"
-            >
+            <a href="" className="footer-link">
               Fund transfer
             </a>
             <br />
-            <a
-              href=""
-              className="footer-link"
-            >
+            <a href="" className="footer-link">
               60 day challenge
             </a>
             <br />
@@ -175,27 +127,27 @@ function Footer() {
             services, please create a ticket here.
           </p>
           <div className="text-center">
-          <a href="" className="footer-link p-2">
-            NSE
-          </a>
-          <a href="" className="footer-link p-2">
-            BSE
-          </a>
-          <a href="" className="footer-link p-2">
-            MCX
-          </a>
-          <a href="" className="footer-link p-2">
-            Terms & conditions
-          </a>
-          <a href="" className="footer-link p-2">
-            Policies & Procedures
-          </a>
-          <a href="" className="footer-link p-2">
-            Privacy policy
-          </a>
-          <a href="" className="footer-link p-2">
-            Disclosure
-          </a>
+            <a href="" className="footer-link p-2">
+              NSE
+            </a>
+            <a href="" className="footer-link p-2">
+              BSE
+            </a>
+            <a href="" className="footer-link p-2">
+              MCX
+            </a>
+            <a href="" className="footer-link p-2">
+              Terms & conditions
+            </a>
+            <a href="" className="footer-link p-2">
+              Policies & Procedures
+            </a>
+            <a href="" className="footer-link p-2">
+              Privacy policy
+            </a>
+            <a href="" className="footer-link p-2">
+              Disclosure
+            </a>
           </div>
         </div>
       </div>
