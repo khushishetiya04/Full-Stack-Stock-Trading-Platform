@@ -3,131 +3,178 @@ import React from "react";
 function EquityCharges() {
   return (
     <div>
-      <div className="table-responsive">
-        <table className="table table-bordered">
-          <thead>
-            <tr>
-              <th></th>
-              <th>Equity delivery</th>
-              <th>Equity intraday</th>
-              <th>F&O - Futures</th>
-              <th>F&O - Options</th>
-            </tr>
-          </thead>
+      <div className="mt-4">
+        {/* Header */}
+        <div className="row border-top border-start border-end border-bottom">
+          <div style={{ width: "16.67%" }}>
+            <p className="mb-0 py-3">
+              <strong></strong>
+            </p>
+          </div>
+          <div style={{ width: "20.83%" }}>
+            <p className="mb-0 py-3">
+              <strong>Equity delivery</strong>
+            </p>
+          </div>
+          <div style={{ width: "20.83%" }}>
+            <p className="mb-0 py-3">
+              <strong>Equity intraday</strong>
+            </p>
+          </div>
+          <div style={{ width: "20.83%" }}>
+            <p className="mb-0 py-3">
+              <strong>F&O - Futures</strong>
+            </p>
+          </div>
+          <div style={{ width: "20.83%" }}>
+            <p className="mb-0 py-3">
+              <strong>F&O - Options</strong>
+            </p>
+          </div>
+        </div>
+        {/* Brokerage */}
+        <div className="row border-start border-end">
+          <div style={{ width: "16.67%" }}>
+            <p className="mb-0 py-3">Brokerage</p>
+          </div>
+          <div style={{ width: "20.83%" }}>
+            <p className="mb-0 py-3">Zero Brokerage</p>
+          </div>
+          <div style={{ width: "20.83%" }}>
+            <p className="mb-0 py-3">
+              0.03% or Rs. 20/executed order whichever is lower
+            </p>
+          </div>
+          <div style={{ width: "20.83%" }}>
+            <p className="mb-0 py-3">
+              0.03% or Rs. 20/executed order whichever is lower
+            </p>
+          </div>
+          <div style={{ width: "20.83%" }}>
+            <p className="mb-0 py-3">Flat Rs. 20 per executed order</p>
+          </div>
+        </div>
+        {/* STT/CTT */}
+        <div className="row border-start border-end">
+          <div style={{ width: "16.67%" }}>
+            <p className="mb-0 py-3">STT/CTT</p>
+          </div>
+          <div style={{ width: "20.83%" }}>
+            <p className="mb-0 py-3">0.1% on buy & sell</p>
+          </div>
+          <div style={{ width: "20.83%" }}>
+            <p className="mb-0 py-3">0.025% on the sell side</p>
+          </div>
+          <div style={{ width: "20.83%" }}>
+            <p className="mb-0 py-3">0.05% on the sell side</p>
+          </div>
+          <div style={{ width: "20.83%" }}>
+            <ul className="mb-0 py-3">
+              <li>
+                0.15% of the intrinsic value on options that are bought and
+                exercised
+              </li>
+              <li>0.15% on sell side (on premium)</li>
+            </ul>
+          </div>
+        </div>
+        {/* Transaction charges */}
+        <div className="row border-start border-end">
+          <div style={{ width: "16.67%" }}>
+            <p className="mb-0 py-3">Transaction charges</p>
+          </div>
+          <div style={{ width: "20.83%" }}>
+            <p className="mb-0 py-3">
+              NSE: 0.00307%
+              <br />
+              BSE: 0.00375%
+            </p>
+          </div>
+          <div style={{ width: "20.83%" }}>
+            <p className="mb-0 py-3">
+              NSE: 0.00307%
+              <br />
+              BSE: 0.00375%
+            </p>
+          </div>
+          <div style={{ width: "20.83%" }}>
+            <p className="mb-0 py-3">
+              NSE: 0.00183%
+              <br />
+              BSE: 0
+            </p>
+          </div>
+          <div style={{ width: "20.83%" }}>
+            <p className="mb-0 py-3">
+              NSE: 0.03553% (on premium)
+              <br />
+              BSE: 0.0325% (on premium)
+            </p>
+          </div>
+        </div>
+        {/* GST */}
+        <div className="row border-start border-end">
+          <div style={{ width: "16.67%" }}>
+            <p className="mb-0 py-3">GST</p>
+          </div>
+          <div style={{ width: "20.23%" }}>
+            <p className="mb-0 py-3">
+              18% on (brokerage + SEBI charges + transaction charges)
+            </p>
+          </div>
+          <div style={{ width: "20.23%" }}>
+            <p className="mb-0 py-3">
+              18% on (brokerage + SEBI charges + transaction charges)
+            </p>
+          </div>
+          <div style={{ width: "20.23%" }}>
+            <p className="mb-0 py-3">
+              18% on (brokerage + SEBI charges + transaction charges)
+            </p>
+          </div>
+          <div style={{ width: "20.23%" }}>
+            <p className="mb-0 py-3">
+              18% on (brokerage + SEBI charges + transaction charges)
+            </p>
+          </div>
+        </div>
+        {/* SEBI charges */}
+        <div className="row border-start border-end">
+          <div style={{ width: "16.67%" }}>
+            <p className="mb-0 py-3">SEBI charges</p>
+          </div>
 
-          <tbody>
-            <tr>
-              <td>Brokerage</td>
-
-              <td>Zero Brokerage</td>
-
-              <td>
-                0.03% or Rs. 20/executed order whichever is lower
-              </td>
-
-              <td>
-                0.03% or Rs. 20/executed order whichever is lower
-              </td>
-
-              <td>
-                Flat Rs. 20 per executed order
-              </td>
-            </tr>
-
-            <tr>
-              <td>STT/CTT</td>
-
-              <td>
-                0.1% on buy & sell
-              </td>
-
-              <td>
-                0.025% on the sell side
-              </td>
-
-              <td>
-                0.05% on the sell side
-              </td>
-
-              <td>
-                <ul>
-                  <li>
-                    0.15% of the intrinsic value on options
-                    that are bought and exercised
-                  </li>
-
-                  <li>
-                    0.15% on sell side (on premium)
-                  </li>
-                </ul>
-              </td>
-            </tr>
-
-            <tr>
-              <td>Transaction charges</td>
-
-              <td>
-                NSE: 0.00307%
-                <br />
-                BSE: 0.00375%
-              </td>
-
-              <td>
-                NSE: 0.00307%
-                <br />
-                BSE: 0.00375%
-              </td>
-
-              <td>
-                NSE: 0.00183%
-                <br />
-                BSE: 0
-              </td>
-
-              <td>
-                NSE: 0.03553% (on premium)
-                <br />
-                BSE: 0.0325% (on premium)
-              </td>
-            </tr>
-
-            <tr>
-              <td>GST</td>
-
-              <td colSpan="4">
-                18% on (brokerage + SEBI charges + transaction charges)
-              </td>
-            </tr>
-
-            <tr>
-              <td>SEBI charges</td>
-
-              <td colSpan="4">
-                ₹10 / crore
-              </td>
-            </tr>
-
-            <tr>
-              <td>Stamp charges</td>
-
-              <td>
-                0.015% or ₹1500 / crore on buy side
-              </td>
-
-              <td>
-                0.003% or ₹300 / crore on buy side
-              </td>
-
-              <td>
-                0.002% or ₹200 / crore on buy side
-              </td>
-
-              <td>
-                0.003% or ₹300 / crore on buy side
-              </td>
-            </tr>
-          </tbody>
-        </table>
+          <div style={{ width: "20.23%" }}>
+            <p className="mb-0 py-3">₹10 / crore</p>
+          </div>
+          <div style={{ width: "20.23%" }}>
+            <p className="mb-0 py-3">₹10 / crore</p>
+          </div>
+          <div style={{ width: "20.23%" }}>
+            <p className="mb-0 py-3">₹10 / crore</p>
+          </div>
+          <div style={{ width: "20.23%" }}>
+            <p className="mb-0 py-3">₹10 / crore</p>
+          </div>
+        </div>
+        {/* Stamp charges */}
+        <div className="row border-start border-end border-bottom">
+          <div style={{ width: "16.67%" }}>
+            <p className="mb-0 py-3">Stamp charges</p>
+          </div>
+          <div style={{ width: "20.83%" }}>
+            <p className="mb-0 py-3">0.015% or ₹1500 / crore on buy side</p>
+          </div>
+          <div style={{ width: "20.83%" }}>
+            <p className="mb-0 py-3">0.003% or ₹300 / crore on buy side</p>
+          </div>
+          <div style={{ width: "20.83%" }}>
+            <p className="mb-0 py-3">0.002% or ₹200 / crore on buy side</p>
+          </div>
+          <div style={{ width: "20.83%" }}>
+            <p className="mb-0 py-3">0.003% or ₹300 / crore on buy side</p>
+          </div>
+        </div>
       </div>
     </div>
   );
