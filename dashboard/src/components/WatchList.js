@@ -1,8 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+
+import GeneralContext from "./GeneralContext";
 
 import { Tooltip, Grow } from "@mui/material";
 
-import { BarChartOutlined, KeyboardArrowDown, KeyboardArrowUp, MoreHoriz } from "@mui/icons-material";
+import {
+  BarChartOutlined,
+  KeyboardArrowDown,
+  KeyboardArrowUp,
+  MoreHoriz,
+} from "@mui/icons-material";
 
 import { watchlist } from "../data/data";
 
@@ -51,17 +58,23 @@ const WatchListItem = ({ stock }) => {
           {stock.isDown ? (
             <KeyboardArrowDown className="down" />
           ) : (
-            <KeyboardArrowUp className="up" />
+            <KeyboardArrowUp className="down" />
           )}
           <span className="price">{stock.price}</span>
         </div>
       </div>
-      {showWatchlistActions && <WatchListActions uid={stock.name}/>}
+      {showWatchlistActions && <WatchListActions uid={stock.name} />}
     </li>
   );
 };
 
 const WatchListActions = ({ uid }) => {
+  const generalContext = useContext(GeneralContext);
+
+  const handleBuyClick = () => {
+    generalContext.openBuyWindow(uid);
+  };
+
   return (
     <span className="actions">
       <span>
@@ -70,6 +83,7 @@ const WatchListActions = ({ uid }) => {
           placement="top"
           arrow
           TransitionComponent={Grow}
+          onClick={handleBuyClick}
         >
           <button className="buy">Buy</button>
         </Tooltip>
@@ -91,12 +105,7 @@ const WatchListActions = ({ uid }) => {
             <BarChartOutlined className="icon" />
           </button>
         </Tooltip>
-        <Tooltip
-          title="More (M)"
-          placement="top"
-          arrow
-          TransitionComponent={Grow}
-        >
+        <Tooltip title="More" placement="top" arrow TransitionComponent={Grow}>
           <button className="action">
             <MoreHoriz className="icon" />
           </button>
