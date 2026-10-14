@@ -860,4 +860,21 @@ hr {
 }
 
 
+.order-table tbody td:nth-child(4) {
+  font-weight: 500;
+}
+
+.order-table tbody td:nth-child(4)[style] {
+  color: inherit;
+}
+
+.order-table td.buy-order {
+  color: #26a69a !important;
+  font-weight: 500;
+}
+
+.order-table td.sell-order {
+  color: #df514c !important;
+  font-weight: 500;
+}
 

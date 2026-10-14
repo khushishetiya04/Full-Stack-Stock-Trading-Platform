@@ -1,9 +1,10 @@
-require('dotenv').config();
+require("dotenv").config();
 
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
 const { HoldingsModel } = require("./model/HoldingsModel");
 const { PositionsModel } = require("./model/PositionsModel");
@@ -14,8 +15,43 @@ const uri = process.env.MONGO_URL;
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "http://localhost:3001"],
+    credentials: true,
+  }),
+);
 app.use(bodyParser.json());
+app.use(cookieParser());
+app.use("/api/auth", require("./routes/auth"));
+
+const authMiddleware = require("./middleware/authMiddleware");
+const { FundsModel } = require("./model/FundsModel");
+
+app.get("/api/funds", authMiddleware, async (req, res) => {
+  try {
+    let funds = await FundsModel.findOne({
+      userId: req.userId,
+    });
+
+    if (!funds) {
+      funds = await FundsModel.create({
+        userId: req.userId,
+        availableBalance: 100000,
+      });
+    }
+
+    return res.status(200).json({
+      availableBalance: funds.availableBalance,
+    });
+  } catch (error) {
+    console.error("Funds fetch error:", error.message);
+
+    return res.status(500).json({
+      message: "Unable to fetch funds.",
+    });
+  }
+});
 
 // app.get("/addHoldings", async (req, res) => {
 //   let tempHoldings = [
@@ -145,8 +181,6 @@ app.use(bodyParser.json());
 //   res.send("Done!");
 // });
 
-
-
 // app.get("/addPositions", async (req, res) => {
 //   let tempPositions = [
 //     {
@@ -188,29 +222,190 @@ app.use(bodyParser.json());
 //   res.send("Done!");
 // });
 
-app.get("/allHoldings", async(req, res) => {
-    let allHoldings = await HoldingsModel.find({});
-    res.json(allHoldings);
-}); 
+app.get("/allHoldings", authMiddleware, async (req, res) => {
+  try {
+    const allHoldings = await HoldingsModel.find({
+      userId: req.userId,
+    });
 
-app.get("/allPositions", async(req, res) => {
-    let allPositions = await PositionsModel.find({});
-    res.json(allPositions);
+    return res.json(allHoldings);
+  } catch (error) {
+    console.error("Fetch holdings error:", error.message);
+
+    return res.status(500).json({
+      message: "Unable to fetch holdings.",
+    });
+  }
 });
 
-app.post("/neworder", async(req, res) => {
-    let newOrder = new OrdersModel({
-        name: req.body.name,
-        qty: req.body.qty,
-        price: req.body.price,
-        mode: req.body.mode,
+app.get("/allOrders", authMiddleware, async (req, res) => {
+  try {
+    const allOrders = await OrdersModel.find({
+      userId: req.userId,
+    }).sort({ createdAt: -1 });
+
+    return res.json(allOrders);
+  } catch (error) {
+    console.error("Fetch orders error:", error.message);
+
+    return res.status(500).json({
+      message: "Unable to fetch orders.",
     });
-    newOrder.save();
-    res.send("Order saved!");
-})
+  }
+});
+
+app.get("/allPositions", authMiddleware, async (req, res) => {
+  try {
+    const allPositions = await PositionsModel.find({
+      userId: req.userId,
+    });
+
+    return res.json(allPositions);
+  } catch (error) {
+    console.error("Fetch positions error:", error.message);
+
+    return res.status(500).json({
+      message: "Unable to fetch positions.",
+    });
+  }
+});
+
+app.post("/neworder", authMiddleware, async (req, res) => {
+  try {
+    const { name, qty, price, mode } = req.body;
+
+    const quantity = Number(qty);
+    const stockPrice = Number(price);
+
+    if (
+      !name ||
+      typeof name !== "string" ||
+      !Number.isInteger(quantity) ||
+      quantity <= 0 ||
+      !Number.isFinite(stockPrice) ||
+      stockPrice <= 0 ||
+      !["BUY", "SELL"].includes(mode)
+    ) {
+      return res.status(400).json({
+        message: "Please provide a valid stock, quantity, price, and mode.",
+      });
+    }
+
+    const totalValue = quantity * stockPrice;
+
+    let funds = await FundsModel.findOne({
+      userId: req.userId,
+    });
+
+    if (!funds) {
+      funds = await FundsModel.create({
+        userId: req.userId,
+        availableBalance: 100000,
+      });
+    }
+
+    if (mode === "BUY") {
+      if (funds.availableBalance < totalValue) {
+        return res.status(400).json({
+          message: "Insufficient funds.",
+        });
+      }
+
+      const existingHolding = await HoldingsModel.findOne({
+        userId: req.userId,
+        name,
+      });
+
+      funds.availableBalance -= totalValue;
+      await funds.save();
+
+      if (existingHolding) {
+        const oldQuantity = existingHolding.qty;
+        const newQuantity = oldQuantity + quantity;
+
+        existingHolding.avg =
+          (existingHolding.avg * oldQuantity + totalValue) / newQuantity;
+
+        existingHolding.qty = newQuantity;
+        existingHolding.price = stockPrice;
+
+        await existingHolding.save();
+      } else {
+        await HoldingsModel.create({
+          userId: req.userId,
+          name,
+          qty: quantity,
+          avg: stockPrice,
+          price: stockPrice,
+          net: "0%",
+          day: "0%",
+        });
+      }
+
+      await OrdersModel.create({
+        userId: req.userId,
+        name,
+        qty: quantity,
+        price: stockPrice,
+        mode: "BUY",
+      });
+
+      return res.status(201).json({
+        message: "Buy order placed successfully.",
+        totalCost: totalValue,
+        availableBalance: funds.availableBalance,
+      });
+    }
+
+    const existingHolding = await HoldingsModel.findOne({
+      userId: req.userId,
+      name,
+    });
+
+    if (!existingHolding || existingHolding.qty < quantity) {
+      return res.status(400).json({
+        message: "Insufficient shares to sell.",
+      });
+    }
+
+    existingHolding.qty -= quantity;
+
+    if (existingHolding.qty === 0) {
+      await HoldingsModel.deleteOne({
+        _id: existingHolding._id,
+        userId: req.userId,
+      });
+    } else {
+      await existingHolding.save();
+    }
+
+    funds.availableBalance += totalValue;
+    await funds.save();
+
+    await OrdersModel.create({
+      userId: req.userId,
+      name,
+      qty: quantity,
+      price: stockPrice,
+      mode: "SELL",
+    });
+
+    return res.status(201).json({
+      message: "Sell order placed successfully.",
+      totalValue,
+      availableBalance: funds.availableBalance,
+    });
+  } catch (error) {
+    console.error("Order error:", error.message);
+
+    return res.status(500).json({
+      message: "Unable to place order.",
+    });
+  }
+});
 
 app.listen(PORT, () => {
-    console.log("App started");
-    mongoose.connect(uri);
-    console.log("DB connected");
+  console.log("App started");
+  mongoose.connect(uri);
+  console.log("DB connected");
 });

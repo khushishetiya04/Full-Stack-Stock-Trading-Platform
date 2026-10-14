@@ -7,12 +7,18 @@ const Positions = () => {
   const [allPositions, setAllPositions] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3002/allPositions").then((res) => {
-      console.log(res.data);
-      setAllPositions(res.data);
-    });
+    axios
+      .get("http://localhost:3002/allPositions", {
+        withCredentials: true,
+      })
+      .then((res) => {
+        console.log(res.data);
+        setAllPositions(res.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching positions:", error);
+      });
   }, []);
-
 
   return (
     <>
