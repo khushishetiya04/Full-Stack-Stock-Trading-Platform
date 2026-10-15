@@ -1,13 +1,43 @@
-
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import axios from "axios";
 
 const Menu = () => {
   const location = useLocation();
-  const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
 
-  const handleProfileClick = () => {
-    setIsProfileDropdownOpen(!isProfileDropdownOpen);
+  const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get("http://localhost:3002/api/auth/me", {
+          withCredentials: true,
+        });
+
+        setUser(response.data.user);
+      } catch (error) {
+        console.error("Error fetching user profile:", error);
+      }
+    };
+
+    fetchUser();
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      await axios.post(
+        "http://localhost:3002/api/auth/logout",
+        {},
+        { withCredentials: true },
+      );
+
+      window.location.href = "http://localhost:3000/login";
+    } catch (error) {
+      alert(
+        error.response?.data?.message || "Logout failed. Please try again.",
+      );
+    }
   };
 
   const menuClass = "menu";
@@ -22,6 +52,16 @@ const Menu = () => {
     { path: "/apps", label: "Apps" },
   ];
 
+  const userName = user?.name || "User";
+
+  const initials = userName
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0].toUpperCase())
+    .join("");
+
   return (
     <div className="menu-container">
       <img src="logo.png" style={{ width: "50px" }} alt="Logo" />
@@ -33,10 +73,7 @@ const Menu = () => {
 
             return (
               <li key={item.path}>
-                <Link
-                  style={{ textDecoration: "none" }}
-                  to={item.path}
-                >
+                <Link style={{ textDecoration: "none" }} to={item.path}>
                   <p className={isSelected ? activeMenuClass : menuClass}>
                     {item.label}
                   </p>
@@ -48,9 +85,22 @@ const Menu = () => {
 
         <hr />
 
-        <div className="profile" onClick={handleProfileClick}>
-          <div className="avatar">ZU</div>
-          <p className="username">USERID</p>
+        <div className="profile-wrapper">
+          <div
+            className="profile"
+            onClick={() => setIsProfileDropdownOpen((previous) => !previous)}
+          >
+            <div className="avatar">{initials || "U"}</div>
+            <p className="username">{userName}</p>
+          </div>
+
+          {isProfileDropdownOpen && (
+            <div className="profile-dropdown">
+              <button type="button" onClick={handleLogout}>
+                Logout
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>

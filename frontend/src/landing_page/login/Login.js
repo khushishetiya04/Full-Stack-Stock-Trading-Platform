@@ -25,10 +25,10 @@ function Login() {
       );
 
       setUser(response.data.user);
-      window.location.href = "http://localhost:3001";
-
       setEmail("");
       setPassword("");
+
+      window.location.href = "http://localhost:3001";
     } catch (error) {
       alert(error.response?.data?.message || "Login failed. Please try again.");
     }

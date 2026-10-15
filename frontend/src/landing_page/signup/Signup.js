@@ -1,20 +1,13 @@
-// import React from "react";
-
-// function Signup() {
-//   return <h1>Signup</h1>;
-// }
-
-// export default Signup;
-
-
-
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -37,6 +30,8 @@ function Signup() {
       setName("");
       setEmail("");
       setPassword("");
+
+      navigate("/login");
     } catch (error) {
       alert(
         error.response?.data?.message ||
