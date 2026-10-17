@@ -32,7 +32,7 @@ export const options = {
   },
   datasets: {
     bar: {
-      barPercentage: 0.5,
+      barPercentage: 0.6,
       categoryPercentage: 0.6,
     },
   },
