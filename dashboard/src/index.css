@@ -553,6 +553,7 @@ hr {
   color: rgb(136, 136, 136);
   margin-bottom: 10px;
   white-space: nowrap;
+  padding-left: 10%;
 }
 
 .data .second p span {
