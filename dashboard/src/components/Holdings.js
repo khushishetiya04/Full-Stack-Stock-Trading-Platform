@@ -19,6 +19,21 @@ const Holdings = () => {
       });
   }, []);
 
+  const totalInvestment = allHoldings.reduce(
+    (total, stock) => total + stock.avg * stock.qty,
+    0,
+  );
+
+  const currentValue = allHoldings.reduce(
+    (total, stock) => total + stock.price * stock.qty,
+    0,
+  );
+
+  const totalPnL = currentValue - totalInvestment;
+
+  const pnlPercentage =
+    totalInvestment > 0 ? (totalPnL / totalInvestment) * 100 : 0;
+
   const labels = allHoldings.map((stock) => stock.name);
 
   const data = {
@@ -74,18 +89,32 @@ const Holdings = () => {
       <div className="row">
         <div className="col">
           <h5>
-            29,875.<span>55</span>{" "}
+            {totalInvestment.toLocaleString("en-IN", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}
           </h5>
           <p>Total investment</p>
         </div>
+
         <div className="col">
           <h5>
-            31,428.<span>95</span>{" "}
+            {currentValue.toLocaleString("en-IN", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}
           </h5>
           <p>Current value</p>
         </div>
+
         <div className="col">
-          <h5>1,553.40 (+5.20%)</h5>
+          <h5 className={totalPnL >= 0 ? "profit" : "loss"}>
+            {totalPnL.toLocaleString("en-IN", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}{" "}
+            ({pnlPercentage.toFixed(2)}%)
+          </h5>
           <p>P&L</p>
         </div>
       </div>
