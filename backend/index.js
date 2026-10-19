@@ -271,136 +271,180 @@ app.get("/allPositions", authMiddleware, async (req, res) => {
 });
 
 app.post("/neworder", authMiddleware, async (req, res) => {
-  try {
-    const { name, qty, price, mode } = req.body;
+  const { name, qty, price, mode } = req.body;
 
-    const quantity = Number(qty);
-    const stockPrice = Number(price);
+  const quantity = Number(qty);
+  const stockPrice = Number(price);
 
-    if (
-      !name ||
-      typeof name !== "string" ||
-      !Number.isInteger(quantity) ||
-      quantity <= 0 ||
-      !Number.isFinite(stockPrice) ||
-      stockPrice <= 0 ||
-      !["BUY", "SELL"].includes(mode)
-    ) {
-      return res.status(400).json({
-        message: "Please provide a valid stock, quantity, price, and mode.",
-      });
-    }
-
-    const totalValue = quantity * stockPrice;
-
-    let funds = await FundsModel.findOne({
-      userId: req.userId,
+  if (
+    !name ||
+    typeof name !== "string" ||
+    !Number.isInteger(quantity) ||
+    quantity <= 0 ||
+    !Number.isFinite(stockPrice) ||
+    stockPrice <= 0 ||
+    !["BUY", "SELL"].includes(mode)
+  ) {
+    return res.status(400).json({
+      message: "Please provide a valid stock, quantity, price, and mode.",
     });
+  }
 
-    if (!funds) {
-      funds = await FundsModel.create({
+  const totalValue = quantity * stockPrice;
+
+  if (!Number.isFinite(totalValue)) {
+    return res.status(400).json({
+      message: "Invalid order value.",
+    });
+  }
+
+  const createOrderError = (message) => {
+    const error = new Error(message);
+    error.statusCode = 400;
+    return error;
+  };
+
+  const session = await mongoose.startSession();
+
+  try {
+    let result;
+
+    await session.withTransaction(async () => {
+      let funds = await FundsModel.findOne({
         userId: req.userId,
-        availableBalance: 100000,
-      });
-    }
+      }).session(session);
 
-    if (mode === "BUY") {
-      if (funds.availableBalance < totalValue) {
-        return res.status(400).json({
-          message: "Insufficient funds.",
-        });
+      if (!funds) {
+        [funds] = await FundsModel.create(
+          [
+            {
+              userId: req.userId,
+              availableBalance: 100000,
+            },
+          ],
+          { session },
+        );
       }
 
-      const existingHolding = await HoldingsModel.findOne({
-        userId: req.userId,
-        name,
-      });
+      if (mode === "BUY") {
+        if (funds.availableBalance < totalValue) {
+          throw createOrderError("Insufficient funds.");
+        }
 
-      funds.availableBalance -= totalValue;
-      await funds.save();
-
-      if (existingHolding) {
-        const oldQuantity = existingHolding.qty;
-        const newQuantity = oldQuantity + quantity;
-
-        existingHolding.avg =
-          (existingHolding.avg * oldQuantity + totalValue) / newQuantity;
-
-        existingHolding.qty = newQuantity;
-        existingHolding.price = stockPrice;
-
-        await existingHolding.save();
-      } else {
-        await HoldingsModel.create({
+        const existingHolding = await HoldingsModel.findOne({
           userId: req.userId,
           name,
-          qty: quantity,
-          avg: stockPrice,
-          price: stockPrice,
-          net: "0%",
-          day: "0%",
-        });
+        }).session(session);
+
+        funds.availableBalance -= totalValue;
+        await funds.save({ session });
+
+        if (existingHolding) {
+          const oldQuantity = existingHolding.qty;
+          const newQuantity = oldQuantity + quantity;
+
+          existingHolding.avg =
+            (existingHolding.avg * oldQuantity + totalValue) / newQuantity;
+
+          existingHolding.qty = newQuantity;
+          existingHolding.price = stockPrice;
+
+          await existingHolding.save({ session });
+        } else {
+          await HoldingsModel.create(
+            [
+              {
+                userId: req.userId,
+                name,
+                qty: quantity,
+                avg: stockPrice,
+                price: stockPrice,
+                net: "0%",
+                day: "0%",
+              },
+            ],
+            { session },
+          );
+        }
+
+        await OrdersModel.create(
+          [
+            {
+              userId: req.userId,
+              name,
+              qty: quantity,
+              price: stockPrice,
+              mode: "BUY",
+            },
+          ],
+          { session },
+        );
+
+        result = {
+          message: "Buy order placed successfully.",
+          totalCost: totalValue,
+          availableBalance: funds.availableBalance,
+        };
+      } else {
+        const existingHolding = await HoldingsModel.findOne({
+          userId: req.userId,
+          name,
+        }).session(session);
+
+        if (!existingHolding || existingHolding.qty < quantity) {
+          throw createOrderError("Insufficient shares to sell.");
+        }
+
+        existingHolding.qty -= quantity;
+
+        if (existingHolding.qty === 0) {
+          await HoldingsModel.deleteOne({
+            _id: existingHolding._id,
+            userId: req.userId,
+          }).session(session);
+        } else {
+          await existingHolding.save({ session });
+        }
+
+        funds.availableBalance += totalValue;
+        await funds.save({ session });
+
+        await OrdersModel.create(
+          [
+            {
+              userId: req.userId,
+              name,
+              qty: quantity,
+              price: stockPrice,
+              mode: "SELL",
+            },
+          ],
+          { session },
+        );
+
+        result = {
+          message: "Sell order placed successfully.",
+          totalValue,
+          availableBalance: funds.availableBalance,
+        };
       }
-
-      await OrdersModel.create({
-        userId: req.userId,
-        name,
-        qty: quantity,
-        price: stockPrice,
-        mode: "BUY",
-      });
-
-      return res.status(201).json({
-        message: "Buy order placed successfully.",
-        totalCost: totalValue,
-        availableBalance: funds.availableBalance,
-      });
-    }
-
-    const existingHolding = await HoldingsModel.findOne({
-      userId: req.userId,
-      name,
     });
 
-    if (!existingHolding || existingHolding.qty < quantity) {
-      return res.status(400).json({
-        message: "Insufficient shares to sell.",
-      });
-    }
-
-    existingHolding.qty -= quantity;
-
-    if (existingHolding.qty === 0) {
-      await HoldingsModel.deleteOne({
-        _id: existingHolding._id,
-        userId: req.userId,
-      });
-    } else {
-      await existingHolding.save();
-    }
-
-    funds.availableBalance += totalValue;
-    await funds.save();
-
-    await OrdersModel.create({
-      userId: req.userId,
-      name,
-      qty: quantity,
-      price: stockPrice,
-      mode: "SELL",
-    });
-
-    return res.status(201).json({
-      message: "Sell order placed successfully.",
-      totalValue,
-      availableBalance: funds.availableBalance,
-    });
+    return res.status(201).json(result);
   } catch (error) {
-    console.error("Order error:", error.message);
+    if (error.statusCode === 400) {
+      return res.status(400).json({
+        message: error.message,
+      });
+    }
+
+    console.error("Order error:", error);
 
     return res.status(500).json({
       message: "Unable to place order.",
     });
+  } finally {
+    await session.endSession();
   }
 });
 
