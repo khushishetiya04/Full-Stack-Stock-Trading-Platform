@@ -177,13 +177,8 @@ code {
   text-align: left;
 }
 
-.order-table tr th:nth-child(1),
-.order-table tr th:nth-child(4) {
-  border-right: 1px solid #f1f1f1;
-}
-
-.order-table tr td:nth-child(1),
-.order-table tr td:nth-child(4) {
+.order-table tr th:nth-child(-n + 5),
+.order-table tr td:nth-child(-n + 5) {
   border-right: 1px solid #f1f1f1;
 }
 
