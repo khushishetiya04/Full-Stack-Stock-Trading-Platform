@@ -68,7 +68,10 @@ const WatchList = () => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <span className="counts"> {watchlist.length} / 50</span>
+        <span className="counts">
+          {" "}
+          {filteredWatchlist.length} / {watchlist.length} stocks
+        </span>
       </div>
 
       <ul className="list">
