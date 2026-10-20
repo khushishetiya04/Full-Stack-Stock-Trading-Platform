@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+import API_URL from "../../api";
 import { useAuth } from "../../AuthContext";
 
 function Login() {
@@ -14,7 +15,7 @@ function Login() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3002/api/auth/login",
+        `${API_URL}/api/auth/login`,
         {
           email,
           password,
@@ -28,7 +29,8 @@ function Login() {
       setEmail("");
       setPassword("");
 
-      window.location.href = "http://localhost:3001";
+      window.location.href =
+        process.env.REACT_APP_DASHBOARD_URL || "http://localhost:3001";
     } catch (error) {
       alert(error.response?.data?.message || "Login failed. Please try again.");
     }

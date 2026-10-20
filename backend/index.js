@@ -15,9 +15,14 @@ const uri = process.env.MONGO_URL;
 
 const app = express();
 
+const allowedOrigins = [
+  process.env.FRONTEND_URL || "http://localhost:3000",
+  process.env.DASHBOARD_URL || "http://localhost:3001",
+];
+
 app.use(
   cors({
-    origin: ["http://localhost:3000", "http://localhost:3001"],
+    origin: allowedOrigins,
     credentials: true,
   }),
 );
@@ -448,8 +453,16 @@ app.post("/neworder", authMiddleware, async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log("App started");
-  mongoose.connect(uri);
-  console.log("DB connected");
-});
+mongoose
+  .connect(uri)
+  .then(() => {
+    console.log("DB connected");
+
+    app.listen(PORT, () => {
+      console.log(`App started on port ${PORT}`);
+    });
+  })
+  .catch((error) => {
+    console.error("MongoDB connection failed:", error.message);
+    process.exit(1);
+  });

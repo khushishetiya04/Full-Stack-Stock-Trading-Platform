@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 
+import API_URL from "../api";
+
 const Menu = () => {
   const location = useLocation();
 
@@ -11,7 +13,7 @@ const Menu = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get("http://localhost:3002/api/auth/me", {
+        const response = await axios.get(`${API_URL}/api/auth/me`, {
           withCredentials: true,
         });
 
@@ -27,12 +29,13 @@ const Menu = () => {
   const handleLogout = async () => {
     try {
       await axios.post(
-        "http://localhost:3002/api/auth/logout",
+        `${API_URL}/api/auth/logout`,
         {},
         { withCredentials: true },
       );
 
-      window.location.href = "http://localhost:3000/login";
+      window.location.href =
+        process.env.REACT_APP_LOGIN_URL || "http://localhost:3000/login";
     } catch (error) {
       alert(
         error.response?.data?.message || "Logout failed. Please try again.",

@@ -1,6 +1,7 @@
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+
+import API_URL from "./api";
 
 function ProtectedDashboard({ children }) {
   const [checkingSession, setCheckingSession] = useState(true);
@@ -9,7 +10,7 @@ function ProtectedDashboard({ children }) {
   useEffect(() => {
     const checkSession = async () => {
       try {
-        await axios.get("http://localhost:3002/api/auth/me", {
+        await axios.get(`${API_URL}/api/auth/me`, {
           withCredentials: true,
         });
 
@@ -17,7 +18,9 @@ function ProtectedDashboard({ children }) {
       } catch (error) {
         console.log("Session check failed:", error.response?.status);
         setIsAuthenticated(false);
-        window.location.replace("http://localhost:3000/login");
+        window.location.replace(
+          process.env.REACT_APP_LOGIN_URL || "http://localhost:3000/login",
+        );
       } finally {
         setCheckingSession(false);
       }
