@@ -154,4 +154,55 @@ describe("New Order API - MongoDB Integration Tests", () => {
       }),
     );
   });
+
+  test("prevents overspending when two BUY orders run simultaneously", async () => {
+    await FundsModel.create({
+      userId,
+      availableBalance: 1000,
+    });
+
+    const placeBuyOrder = () =>
+      request(app).post("/neworder").set("Cookie", `token=${token}`).send({
+        name: "TCS",
+        qty: 1,
+        price: 800,
+        mode: "BUY",
+      });
+
+    const responses = await Promise.all([placeBuyOrder(), placeBuyOrder()]);
+
+    const savedFunds = await FundsModel.findOne({ userId }).lean();
+
+    const savedHoldings = await HoldingsModel.find({
+      userId,
+      name: "TCS",
+    }).lean();
+
+    const savedOrders = await OrdersModel.find({ userId }).lean();
+
+    const successfulOrders = responses.filter(
+      (response) => response.status === 201,
+    );
+
+    expect(successfulOrders).toHaveLength(1);
+
+    expect(
+      responses.every((response) => [201, 400, 500].includes(response.status)),
+    ).toBe(true);
+
+    expect(savedFunds.availableBalance).toBe(200);
+
+    expect(savedHoldings).toHaveLength(1);
+    expect(savedHoldings[0].qty).toBe(1);
+
+    expect(savedOrders).toHaveLength(1);
+    expect(savedOrders[0]).toEqual(
+      expect.objectContaining({
+        name: "TCS",
+        qty: 1,
+        price: 800,
+        mode: "BUY",
+      }),
+    );
+  });
 });
