@@ -7,19 +7,42 @@ import GeneralContext from "./GeneralContext";
 
 const Holdings = () => {
   const [allHoldings, setAllHoldings] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
   const { refreshVersion } = useContext(GeneralContext);
 
   useEffect(() => {
+    let active = true;
+
+    setLoading(true);
+    setError("");
+
     axios
       .get(`${API_URL}/allHoldings`, {
         withCredentials: true,
       })
       .then((res) => {
-        setAllHoldings(res.data);
+        if (active) {
+          setAllHoldings(res.data);
+        }
       })
       .catch((error) => {
         console.error("Error fetching holdings:", error);
+
+        if (active) {
+          setError("Unable to load holdings. Please try again.");
+        }
+      })
+      .finally(() => {
+        if (active) {
+          setLoading(false);
+        }
       });
+
+    return () => {
+      active = false;
+    };
   }, [refreshVersion]);
 
   const totalInvestment = allHoldings.reduce(
@@ -49,6 +72,18 @@ const Holdings = () => {
       },
     ],
   };
+
+  if (loading) {
+    return <p>Loading holdings...</p>;
+  }
+
+  if (error) {
+    return (
+      <p role="alert" className="text-danger">
+        {error}
+      </p>
+    );
+  }
 
   return (
     <>

@@ -50,10 +50,10 @@ describe("Holdings Component", () => {
     axios.get.mockResolvedValue({ data: mockHoldings });
   });
 
-  test("renders the holdings table headings", () => {
+  test("renders the holdings table headings", async () => {
     renderHoldings();
 
-    expect(screen.getByText("Instrument")).toBeInTheDocument();
+    expect(await screen.findByText("Instrument")).toBeInTheDocument();
     expect(screen.getByText("Qty.")).toBeInTheDocument();
     expect(screen.getByText("Avg. cost")).toBeInTheDocument();
     expect(screen.getByText("LTP")).toBeInTheDocument();
@@ -122,10 +122,10 @@ describe("Holdings Component", () => {
     expect(tcsLoss).toHaveClass("loss");
   });
 
-  test("renders the vertical graph", () => {
+  test("renders the vertical graph", async () => {
     renderHoldings();
 
-    expect(screen.getByText("Vertical Graph")).toBeInTheDocument();
+    expect(await screen.findByText("Vertical Graph")).toBeInTheDocument();
   });
 
   test("refetches holdings when refreshVersion changes", async () => {
@@ -151,19 +151,21 @@ describe("Holdings Component", () => {
       .spyOn(console, "error")
       .mockImplementation(() => {});
 
-    axios.get.mockRejectedValueOnce(new Error("Request failed"));
+    try {
+      axios.get.mockRejectedValueOnce(new Error("Request failed"));
 
-    renderHoldings();
+      renderHoldings();
 
-    await waitFor(() => {
+      expect(await screen.findByRole("alert")).toHaveTextContent(
+        "Unable to load holdings. Please try again.",
+      );
+
       expect(consoleError).toHaveBeenCalledWith(
         "Error fetching holdings:",
         expect.any(Error),
       );
-    });
-
-    expect(screen.getByText("Holdings (0)")).toBeInTheDocument();
-
-    consoleError.mockRestore();
+    } finally {
+      consoleError.mockRestore();
+    }
   });
 });
