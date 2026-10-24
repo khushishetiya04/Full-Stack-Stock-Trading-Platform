@@ -58,6 +58,9 @@ const WatchList = () => {
 
   return (
     <div className="watchlist-container">
+      <p>
+        Demo prices only. Not live market data.
+      </p>
       <div className="search-container">
         <input
           type="text"
