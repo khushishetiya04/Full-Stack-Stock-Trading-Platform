@@ -25,7 +25,7 @@ describe("Funds Component", () => {
     jest.clearAllMocks();
   });
 
-  test("renders the main funds page content", () => {
+  test("renders the main funds page content", async () => {
     axios.get.mockResolvedValue({
       data: { availableBalance: 100000 },
     });
@@ -33,7 +33,7 @@ describe("Funds Component", () => {
     renderFunds();
 
     expect(
-      screen.getByText("Instant, zero-cost fund transfers with UPI"),
+      await screen.findByText("Instant, zero-cost fund transfers with UPI"),
     ).toBeInTheDocument();
 
     expect(screen.getByText("Equity")).toBeInTheDocument();
@@ -158,28 +158,29 @@ describe("Funds Component", () => {
     try {
       renderFunds();
 
-      await waitFor(() => {
-        expect(consoleError).toHaveBeenCalledWith(
-          "Error fetching funds:",
-          expect.any(Error),
-        );
-      });
+      expect(await screen.findByRole("alert")).toHaveTextContent(
+        "Unable to load funds. Please try again.",
+      );
 
-      expect(screen.getByText("Available margin")).toBeInTheDocument();
-      expect(screen.getByText("Available cash")).toBeInTheDocument();
+      expect(consoleError).toHaveBeenCalledWith(
+        "Error fetching funds:",
+        expect.any(Error),
+      );
     } finally {
       consoleError.mockRestore();
     }
   });
 
-  test("renders the funds-related links", () => {
+  test("renders the funds-related links", async () => {
     axios.get.mockResolvedValue({
       data: { availableBalance: 100000 },
     });
 
     renderFunds();
 
-    expect(screen.getByRole("link", { name: "Add funds" })).toBeInTheDocument();
+    expect(
+      await screen.findByRole("link", { name: "Add funds" }),
+    ).toBeInTheDocument();
 
     expect(screen.getByRole("link", { name: "Withdraw" })).toBeInTheDocument();
 

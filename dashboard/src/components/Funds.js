@@ -7,25 +7,60 @@ import GeneralContext from "./GeneralContext";
 
 const Funds = () => {
   const [availableBalance, setAvailableBalance] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
   const { refreshVersion } = useContext(GeneralContext);
 
   useEffect(() => {
+    let active = true;
+
+    setLoading(true);
+    setError("");
+
     axios
       .get(`${API_URL}/api/funds`, {
         withCredentials: true,
       })
       .then((res) => {
-        setAvailableBalance(Number(res.data.availableBalance) || 0);
+        if (active) {
+          setAvailableBalance(Number(res.data.availableBalance) || 0);
+        }
       })
       .catch((error) => {
         console.error("Error fetching funds:", error);
+
+        if (active) {
+          setError("Unable to load funds. Please try again.");
+        }
+      })
+      .finally(() => {
+        if (active) {
+          setLoading(false);
+        }
       });
+
+    return () => {
+      active = false;
+    };
   }, [refreshVersion]);
 
   const formattedBalance = availableBalance.toLocaleString("en-IN", {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   });
+
+  if (loading) {
+    return <p>Loading funds...</p>;
+  }
+
+  if (error) {
+    return (
+      <p role="alert" className="text-danger">
+        {error}
+      </p>
+    );
+  }
 
   return (
     <>
