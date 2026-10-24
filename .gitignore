@@ -24,3 +24,6 @@ Thumbs.db
 
 # Git backup
 .git-backup/
+
+# Test coverage reports
+coverage/
