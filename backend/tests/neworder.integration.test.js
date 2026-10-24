@@ -205,4 +205,49 @@ describe("New Order API - MongoDB Integration Tests", () => {
       }),
     );
   });
+
+  test("rolls back funds and holdings when saving an order fails", async () => {
+    await FundsModel.create({
+      userId,
+      availableBalance: 1000,
+    });
+
+    const orderCreateSpy = jest
+      .spyOn(OrdersModel, "create")
+      .mockRejectedValueOnce(new Error("Simulated order save failure"));
+
+    const consoleErrorSpy = jest
+      .spyOn(console, "error")
+      .mockImplementation(() => {});
+
+    try {
+      const response = await request(app)
+        .post("/neworder")
+        .set("Cookie", `token=${token}`)
+        .send({
+          name: "TCS",
+          qty: 1,
+          price: 800,
+          mode: "BUY",
+        });
+
+      expect(response.status).toBe(500);
+
+      const savedFunds = await FundsModel.findOne({ userId }).lean();
+
+      const savedHoldings = await HoldingsModel.find({
+        userId,
+        name: "TCS",
+      }).lean();
+
+      const savedOrders = await OrdersModel.find({ userId }).lean();
+
+      expect(savedFunds.availableBalance).toBe(1000);
+      expect(savedHoldings).toHaveLength(0);
+      expect(savedOrders).toHaveLength(0);
+    } finally {
+      orderCreateSpy.mockRestore();
+      consoleErrorSpy.mockRestore();
+    }
+  });
 });
