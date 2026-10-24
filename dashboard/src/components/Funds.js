@@ -100,11 +100,6 @@ const Funds = () => {
             </div>
 
             <div className="data">
-              <p>Opening Balance</p>
-              <p>1,00,000.00</p>
-            </div>
-
-            <div className="data">
               <p>Payin</p>
               <p>0.00</p>
             </div>
