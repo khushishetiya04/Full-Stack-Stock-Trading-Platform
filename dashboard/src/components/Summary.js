@@ -63,6 +63,13 @@ const Summary = () => {
 
   const totalPnL = currentValue - totalInvestment;
 
+  const totalPortfolioValue = availableBalance + currentValue;
+
+  const overallPnL = totalPortfolioValue - openingBalance;
+
+  const overallPnLPercentage =
+    openingBalance > 0 ? (overallPnL / openingBalance) * 100 : 0;
+
   const pnlPercentage =
     totalInvestment > 0 ? (totalPnL / totalInvestment) * 100 : 0;
 
@@ -153,6 +160,45 @@ const Summary = () => {
 
             <p>
               Investment <span>{formatCompact(totalInvestment)}</span>
+            </p>
+          </div>
+        </div>
+
+        <hr className="divider" />
+      </div>
+      <div className="section">
+        <span>
+          <p>Portfolio Overview</p>
+        </span>
+
+        <div className="data">
+          <div className="first">
+            <h3>{formatAmount(totalPortfolioValue)}</h3>
+            <p>Total Portfolio Value</p>
+          </div>
+
+          <hr />
+
+          <div className="second">
+            <p>
+              Available Balance
+              <span>{formatCompact(availableBalance)}</span>
+            </p>
+
+            <p>
+              Current Holdings Value
+              <span>{formatCompact(currentValue)}</span>
+            </p>
+
+            <p>
+              Overall P&amp;L
+              <span className={overallPnL >= 0 ? "profit" : "loss"}>
+                {overallPnL >= 0 ? "+" : ""}
+                {formatAmount(overallPnL)}
+                {" ("}
+                {overallPnL >= 0 ? "+" : ""}
+                {overallPnLPercentage.toFixed(2)}%{")"}
+              </span>
             </p>
           </div>
         </div>
