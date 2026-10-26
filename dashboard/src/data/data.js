@@ -53,6 +53,48 @@ export const watchlist = [
     percent: "1.04%",
     isDown: false,
   },
+  {
+    name: "BHARTIARTL",
+    price: 541.15,
+    percent: "+2.99%",
+    isDown: false,
+  },
+  {
+    name: "HDFCBANK",
+    price: 1522.35,
+    percent: "+0.11%",
+    isDown: false,
+  },
+  {
+    name: "HINDUNILVR",
+    price: 2417.4,
+    percent: "+0.21%",
+    isDown: false,
+  },
+  {
+    name: "ITC",
+    price: 207.9,
+    percent: "+0.80%",
+    isDown: false,
+  },
+  {
+    name: "SBIN",
+    price: 430.2,
+    percent: "-0.34%",
+    isDown: true,
+  },
+  {
+    name: "SGBMAY29",
+    price: 4719.0,
+    percent: "+0.15%",
+    isDown: false,
+  },
+  {
+    name: "TATAPOWER",
+    price: 124.15,
+    percent: "-0.24%",
+    isDown: true,
+  },
 ];
 
 // holdings

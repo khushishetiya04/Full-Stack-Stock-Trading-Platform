@@ -11,6 +11,8 @@ const { PositionsModel } = require("./model/PositionsModel");
 const { OrdersModel } = require("./model/OrdersModel");
 const { FundsModel } = require("./model/FundsModel");
 
+const stockPrices = require("./data/stockPrices");
+
 const authMiddleware = require("./middleware/authMiddleware");
 
 const PORT = process.env.PORT || 3002;
@@ -32,7 +34,6 @@ app.use(
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use("/api/auth", require("./routes/auth"));
-
 
 app.get("/api/funds", authMiddleware, async (req, res) => {
   try {
@@ -234,7 +235,20 @@ app.get("/allHoldings", authMiddleware, async (req, res) => {
       userId: req.userId,
     });
 
-    return res.json(allHoldings);
+    const updatedHoldings = allHoldings.map((stock) => {
+      const marketPrice = stockPrices[stock.name] ?? stock.price;
+
+      const netChange =
+        stock.avg > 0 ? ((marketPrice - stock.avg) / stock.avg) * 100 : 0;
+
+      return {
+        ...stock.toObject(),
+        price: marketPrice,
+        net: `${netChange >= 0 ? "+" : ""}${netChange.toFixed(2)}%`,
+      };
+    });
+
+    return res.json(updatedHoldings);
   } catch (error) {
     console.error("Fetch holdings error:", error.message);
 
