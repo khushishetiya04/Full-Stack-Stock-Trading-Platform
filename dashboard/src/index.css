@@ -235,10 +235,6 @@ code {
   margin-top: 2%;
 }
 
-.row .col:last-child h5 {
-  color: rgb(72, 194, 55);
-}
-
 /* sudo selector */
 .item:hover {
   cursor: pointer;
@@ -320,7 +316,6 @@ hr {
 }
 
 /* sudo selectors */
-
 .menu:hover {
   color: rgb(245, 104, 52);
 }
@@ -372,34 +367,9 @@ hr {
   background: rgb(110, 110, 253);
 }
 
-.title {
-  font-size: 1.3rem;
-  font-weight: 300;
-  color: rgb(71, 71, 71);
-  margin-bottom: 2%;
-}
-
-.order-table table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
 .order-table tr {
   border-top: 1px solid rgb(211, 211, 211);
   border-bottom: 1px solid rgb(211, 211, 211);
-}
-
-.order-table th {
-  text-align: right;
-  padding: 15px 10px;
-  color: rgb(145, 145, 145);
-  font-weight: 300;
-  font-size: 0.8rem;
-}
-
-.order-table tr th:first-child,
-.order-table tr td:first-child {
-  text-align: left;
 }
 
 .order-table tr td:first-child p {
@@ -410,30 +380,6 @@ hr {
   border-radius: 2px;
 }
 
-.order-table tr td:last-child {
-  font-size: 0.6rem;
-}
-
-.order-table td {
-  padding: 10px 10px;
-  text-align: right;
-  font-weight: 400;
-  font-size: 0.9rem;
-  color: rgb(73, 73, 73);
-}
-
-.align-left {
-  text-align: left;
-}
-
-.order-table td.profit {
-  color: rgb(72, 194, 55);
-}
-
-.order-table td.loss {
-  color: rgb(250, 118, 78);
-}
-
 .row {
   display: flex;
   align-items: center;
@@ -441,37 +387,15 @@ hr {
   margin-top: 5%;
 }
 
-.col {
-  flex-basis: 33%;
-}
-
-.col h5 {
-  font-size: 1.8rem;
-  color: rgb(71, 71, 71);
-  font-weight: 300;
-}
-
-.col h5 span {
-  font-weight: 300;
-  font-size: 0.9rem;
-}
-
-.col p {
-  font-size: 0.8rem;
-  color: rgb(153, 153, 153);
-  font-weight: 300;
-  margin-top: 2%;
-}
-
-.row .col:last-child h5 {
+.row .col h5.profit {
   color: rgb(72, 194, 55);
 }
 
-/* sudo selector */
-.item:hover {
-  cursor: pointer;
+.row .col h5.loss {
+  color: rgb(250, 118, 78);
 }
 
+/* sudo selector */
 .username h6 {
   font-size: 1.5rem;
   font-weight: 400;
@@ -531,11 +455,6 @@ hr {
 
 .data .first small {
   font-size: 0.8rem;
-  color: rgb(72, 194, 55);
-}
-
-.data .first .profit {
-  color: rgb(72, 194, 55);
 }
 
 .data hr {
@@ -556,6 +475,24 @@ hr {
   margin-left: 5%;
   font-size: 0.9rem;
   color: rgb(100, 100, 100);
+}
+
+.data .first h3.profit,
+.data .first h3.profit small {
+  color: rgb(72, 194, 55);
+}
+
+.data .first h3.loss,
+.data .first h3.loss small {
+  color: rgb(250, 118, 78);
+}
+
+.data .second p span.profit {
+  color: rgb(72, 194, 55);
+}
+
+.data .second p span.loss {
+  color: rgb(250, 118, 78);
 }
 
 .section hr {
@@ -914,4 +851,3 @@ hr {
   background: #f5f5f5;
   color: #df5b2b;
 }
-
