@@ -7,9 +7,7 @@ function Footer() {
         <div className="row mt-5">
           <div className="col">
             <img src="/media/logo.svg" style={{ width: "50%" }} />
-            <p>
-              &copy; 2010 - 2026, Not Zerodha Broking Ltd. All rights reserved.
-            </p>
+            <p>&copy; 2026 Full Stack Stock Trading Platform.</p>
           </div>
           <div className="col">
             <p>Company</p>
@@ -87,16 +85,10 @@ function Footer() {
         </div>
         <div className="mt-5 text-muted" style={{ fontSize: "14px" }}>
           <p>
-            Zerodha Broking Limited: Member of NSE, BSE, MCX & MSEI-SEBI
-            Registration no.: INZ000031633 CDSL/NSDL: Depository services
-            through Zerodha Broking Limited-SEBI Registration no.:
-            IN-DP-431-2019, CIN: U65929KA2018PLC116815, Registered Address:
-            #153/154, 4th Cross, Dollars Colony, Opp. Clarence Public School,
-            J.P Nagar 4th Phase, Bengaluru - 560078, Karnataka, India. For any
-            complaints pertaining to securities broking please write to
-            complaints@zerodha.com, for DP related to dp@zerodha.com. Please
-            ensure you carefully read the Risk Disclosure Document as prescribed
-            by SEBI | ICF
+            Independent demo project with simulated trading only. Not affiliated
+            with Zerodha or any broker, exchange or financial institution.
+            Prices are for demonstration only and nothing here is investment
+            advice.
           </p>
           <p>
             Procedure to file a complaint on SEBI SCORES/SMARTODR: Register on
