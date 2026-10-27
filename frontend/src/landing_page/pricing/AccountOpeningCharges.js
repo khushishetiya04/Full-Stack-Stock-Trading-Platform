@@ -6,7 +6,6 @@ function AccountOpeningCharges() {
       <h2>Charges for account opening</h2>
 
       <div className="mt-4">
-        {/* Header */}
         <div className="row border-top border-bottom border-start border-end">
           <div className="col-6">
             <p className="mb-0 py-3">
@@ -21,7 +20,6 @@ function AccountOpeningCharges() {
           </div>
         </div>
 
-        {/* Individual account */}
         <div className="row border-start border-end">
           <div className="col-6">
             <p className="mb-0 py-3">Individual account</p>
@@ -34,7 +32,6 @@ function AccountOpeningCharges() {
           </div>
         </div>
 
-        {/* Minor account */}
         <div className="row border-start border-end">
           <div className="col-6">
             <p className="mb-0 py-3">Minor account</p>
@@ -47,7 +44,6 @@ function AccountOpeningCharges() {
           </div>
         </div>
 
-        {/* NRI account */}
         <div className="row border-start border-end">
           <div className="col-6">
             <p className="mb-0 py-3">NRI account</p>
@@ -58,7 +54,6 @@ function AccountOpeningCharges() {
           </div>
         </div>
 
-        {/* HUF account */}
         <div className="row border-start border-end">
           <div className="col-6">
             <p className="mb-0 py-3">HUF account</p>
@@ -71,7 +66,6 @@ function AccountOpeningCharges() {
           </div>
         </div>
 
-        {/* Partnership */}
         <div className="row border-bottom border-start border-end">
           <div className="col-6">
             <p className="mb-0 py-3">

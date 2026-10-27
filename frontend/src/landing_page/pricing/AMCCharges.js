@@ -8,7 +8,6 @@ function AMCCharges() {
       <h5 className="mt-4">From second year onwards, for BSDA accounts:</h5>
 
       <div className="mt-4">
-        {/* Header */}
         <div className="row border-top border-bottom border-start border-end">
           <div className="col-6">
             <p className="mb-0 py-3">
@@ -21,7 +20,7 @@ function AMCCharges() {
             </p>
           </div>
         </div>
-        {/* Up to ₹4 lakh */}
+
         <div className="row border-start border-end">
           <div className="col-6">
             <p className="mb-0 py-3">Up to ₹4 lakh</p>
@@ -32,7 +31,7 @@ function AMCCharges() {
             </p>
           </div>
         </div>
-        {/* ₹4 lakh – ₹10 lakh */}
+
         <div className="row border-start border-end">
           <div className="col-6">
             <p className="mb-0 py-3">₹4 lakh – ₹10 lakh</p>
@@ -43,7 +42,7 @@ function AMCCharges() {
             </p>
           </div>
         </div>
-        {/* Above ₹10 lakh */}
+
         <div className="row border-bottom border-start border-end">
           <div className="col-6">
             <p className="mb-0 py-3">Above ₹10 lakh</p>

@@ -4,9 +4,7 @@ function CreateTicket() {
   return (
     <div className="container">
       <div className="row mt-5 mb-5">
-        {/* LEFT SIDE */}
         <div className="col-8">
-          {/* ACCOUNT OPENING */}
           <div className="border mb-3">
             <button
               className="btn w-100 text-start border-0 rounded-0 py-3 px-4"
@@ -58,7 +56,6 @@ function CreateTicket() {
             </div>
           </div>
 
-          {/* YOUR ZERODHA ACCOUNT */}
           <div className="border mb-3">
             <button
               className="btn w-100 text-start border-0 rounded-0 py-3 px-4"
@@ -110,7 +107,6 @@ function CreateTicket() {
             </div>
           </div>
 
-          {/* KITE */}
           <div className="border mb-3">
             <button
               className="btn w-100 text-start border-0 rounded-0 py-3 px-4"
@@ -167,7 +163,6 @@ function CreateTicket() {
             </div>
           </div>
 
-          {/* FUNDS */}
           <div className="border mb-3">
             <button
               className="btn w-100 text-start border-0 rounded-0 py-3 px-4"
@@ -214,7 +209,6 @@ function CreateTicket() {
             </div>
           </div>
 
-          {/* CONSOLE */}
           <div className="border mb-3">
             <button
               className="btn w-100 text-start border-0 rounded-0 py-3 px-4"
@@ -271,7 +265,6 @@ function CreateTicket() {
             </div>
           </div>
 
-          {/* COIN */}
           <div className="border mb-3">
             <button
               className="btn w-100 text-start border-0 rounded-0 py-3 px-4"
@@ -329,7 +322,6 @@ function CreateTicket() {
           </div>
         </div>
 
-        {/* RIGHT SIDE */}
         <div className="col-4 ps-5">
           <div
             className="p-4 mb-5"
@@ -347,7 +339,6 @@ function CreateTicket() {
             <a href="">• Latest Intraday leverages and Square-off timings</a>
           </div>
 
-          {/* QUICK LINKS */}
           <div className="border">
             <h5 className="p-4 mb-0">Quick links</h5>
             <a

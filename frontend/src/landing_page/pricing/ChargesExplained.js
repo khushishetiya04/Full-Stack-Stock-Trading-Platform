@@ -13,6 +13,7 @@ function ChargesExplained() {
             sell side for intraday and F&O trades.
           </p>
         </div>
+
         <div className="col-6 mb-5">
           <h4>Transaction/Turnover Charges</h4>
           <p className="text-muted">
@@ -20,6 +21,7 @@ function ChargesExplained() {
             MCX on transactions executed through them.
           </p>
         </div>
+
         <div className="col-6 mb-5">
           <h4>Call & Trade</h4>
           <p className="text-muted">
@@ -27,6 +29,7 @@ function ChargesExplained() {
             Zerodha's call and trade service.
           </p>
         </div>
+
         <div className="col-6 mb-5">
           <h4>Stamp Charges</h4>
           <p className="text-muted">
@@ -34,6 +37,7 @@ function ChargesExplained() {
             securities. It is applicable on the buy side.
           </p>
         </div>
+
         <div className="col-6 mb-5">
           <h4>NRI Brokerage Charges</h4>
           <p className="text-muted">
@@ -41,6 +45,7 @@ function ChargesExplained() {
             on the type of transaction.
           </p>
         </div>
+
         <div className="col-6 mb-5">
           <h4>Account with Debit Balance</h4>
           <p className="text-muted">
@@ -48,6 +53,7 @@ function ChargesExplained() {
             in the trading account.
           </p>
         </div>
+
         <div className="col-6 mb-5">
           <h4>IPFT</h4>
           <p className="text-muted">
@@ -55,6 +61,7 @@ function ChargesExplained() {
             support investor protection mechanisms.
           </p>
         </div>
+
         <div className="col-6 mb-5">
           <h4>MTF</h4>
           <p className="text-muted">
@@ -62,6 +69,7 @@ function ChargesExplained() {
             borrowing funds. Interest is charged on the funded amount.
           </p>
         </div>
+
         <div className="col-6 mb-5">
           <h4>GST</h4>
           <p className="text-muted">
@@ -69,6 +77,7 @@ function ChargesExplained() {
             as brokerage, transaction charges, and SEBI charges.
           </p>
         </div>
+
         <div className="col-6 mb-5">
           <h4>SEBI Charges</h4>
           <p className="text-muted">
@@ -76,6 +85,7 @@ function ChargesExplained() {
             Exchange Board of India.
           </p>
         </div>
+
         <div className="col-6 mb-5">
           <h4>DP Charges</h4>
           <p className="text-muted">
@@ -83,6 +93,7 @@ function ChargesExplained() {
             debited from your demat account.
           </p>
         </div>
+
         <div className="col-6 mb-5">
           <h4>Pledging Charges</h4>
           <p className="text-muted">
@@ -90,6 +101,7 @@ function ChargesExplained() {
             for trading.
           </p>
         </div>
+
         <div className="col-6 mb-5">
           <h4>AMC</h4>
           <p className="text-muted">
@@ -97,6 +109,7 @@ function ChargesExplained() {
             account, depending on the account type and holdings.
           </p>
         </div>
+
         <div className="col-6 mb-5">
           <h4>Corporate Action Order Charges</h4>
           <p className="text-muted">
@@ -104,6 +117,7 @@ function ChargesExplained() {
             actions.
           </p>
         </div>
+
         <div className="col-6 mb-5">
           <h4>Off-market Transfer Charges</h4>
           <p className="text-muted">
@@ -111,6 +125,7 @@ function ChargesExplained() {
             accounts outside the stock exchange.
           </p>
         </div>
+
         <div className="col-6 mb-5">
           <h4>Physical CMR Request</h4>
           <p className="text-muted">
@@ -118,6 +133,7 @@ function ChargesExplained() {
             Master Report.
           </p>
         </div>
+
         <div className="col-6 mb-5">
           <h4>Payment Gateway Charges</h4>
           <p className="text-muted">
@@ -125,6 +141,7 @@ function ChargesExplained() {
             payment methods.
           </p>
         </div>
+
         <div className="col-6 mb-5">
           <h4>Delayed Payment Charges</h4>
           <p className="text-muted">
@@ -134,6 +151,7 @@ function ChargesExplained() {
             </a>
           </p>
         </div>
+
         <div className="col-6 mb-3">
           <h4>Trading using 3-in-1 account with block functionality</h4>
           <p className="text-muted">
@@ -144,6 +162,7 @@ function ChargesExplained() {
           </p>
         </div>
       </div>
+
       <div className="mt-4">
         <h4 className="mb-4 fs-6">Disclaimer</h4>
         <p className="text-muted">

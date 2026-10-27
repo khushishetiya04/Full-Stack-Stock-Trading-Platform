@@ -16,6 +16,7 @@ function Hero() {
             0 brokerage.
           </p>
         </div>
+
         <div className="col-4 p-4">
           <img src="/media/intradayTrades.svg" />
           <h1 className="fs-3">Intraday and F&O trades</h1>
@@ -25,6 +26,7 @@ function Hero() {
             ₹20 on all option trades.
           </p>
         </div>
+
         <div className="col-4 p-4">
           <img src="/media/pricingequity.svg" />
           <h1 className="fs-3">Free direct MF</h1>

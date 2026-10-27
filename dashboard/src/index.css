@@ -629,12 +629,6 @@ hr {
   position: relative;
 }
 
-/* .item-info {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-} */
-
 .itemInfo {
   display: flex;
   align-items: center;
