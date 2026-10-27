@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
 import { AuthProvider } from "./AuthContext";
 
+import DisclaimerBanner from "./landing_page/DisclaimerBanner";
 import HomePage from "./landing_page/home/HomePage";
 import Signup from "./landing_page/signup/Signup";
 import Login from "./landing_page/login/Login";
@@ -20,6 +21,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <AuthProvider>
+      <DisclaimerBanner />
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
