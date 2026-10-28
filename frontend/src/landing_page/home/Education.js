@@ -5,24 +5,28 @@ function Education() {
     <div className="container mt-5">
       <div className="row">
         <div className="col-6">
-          <img src="media/education.svg" style={{ width: "70%" }} />
+          <img
+            src="/media/education.svg"
+            style={{ width: "70%" }}
+            alt="Stock market education"
+          />
         </div>
         <div className="col-6">
           <h1 className="mb-3 fs-2">Free and open market education</h1>
           <p>
-            Varsity, the largest online stock market education book in the worls
-            covering everything from thr basics to advanced trading
+            Varsity offers stock market education covering topics from the
+            basics to advanced trading concepts.
           </p>
-          <a href="" style={{ textDecoration: "none" }}>
-            Versity <i className="fa-solid fa-arrow-right-long"></i>
-          </a>
+          <p className="text-primary">
+            Varsity <i className="fa-solid fa-arrow-right-long"></i>
+          </p>
           <p className="mt-5">
             TradingQ&A, the most active trading and investment community in
             India for all your market related queries.
           </p>
-          <a href="" style={{ textDecoration: "none" }}>
+          <p className="text-primary">
             TradingQ&A <i className="fa-solid fa-arrow-right-long"></i>
-          </a>
+          </p>
         </div>
       </div>
     </div>

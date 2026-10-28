@@ -15,7 +15,11 @@ function Navbar() {
     >
       <div className="container p-2">
         <Link className="navbar-brand" to="/" onClick={closeMenu}>
-          <img src="/media/logo.svg" style={{ width: "25%" }} alt="Logo" />
+          <img
+            src="/media/logo.svg"
+            style={{ width: "150px", maxWidth: "100%" }}
+            alt="Stock trading demo home"
+          />
         </Link>
 
         <button

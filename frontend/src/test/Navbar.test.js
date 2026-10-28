@@ -13,8 +13,9 @@ describe("Navbar Component", () => {
       </MemoryRouter>,
     );
 
-    expect(screen.getByAltText("Logo")).toBeInTheDocument();
-    expect(screen.getByAltText("Logo")).toHaveAttribute(
+    expect(screen.getByAltText("Stock trading demo home")).toBeInTheDocument();
+
+    expect(screen.getByAltText("Stock trading demo home")).toHaveAttribute(
       "src",
       "/media/logo.svg",
     );

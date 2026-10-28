@@ -8,12 +8,7 @@ function Hero() {
         <h3 className="mt-3 fs-4">
           Sleek, modern, and intuitive trading platforms
         </h3>
-        <p className="mt-3 mb-3">
-          Check out our{" "}
-          <a href="" style={{ textDecoration: "none" }}>
-            investment offerings <i className="fa-solid fa-arrow-right-long"></i>
-          </a>
-        </p>
+        <p className="mt-3 mb-3">Explore Zerodha's investment offerings.</p>
       </div>
     </div>
   );

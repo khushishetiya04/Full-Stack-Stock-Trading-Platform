@@ -3,7 +3,7 @@ import React from "react";
 function ChargesExplained() {
   return (
     <div className="container mt-5 mb-5">
-      <h2 className="text-center mb-5">Charges explained</h2>
+      <h2 className="text-center mb-5">Zerodha Charges Explained</h2>
       <div className="row">
         <div className="col-6 mb-5">
           <h4>Securities/Commodities Transaction Tax</h4>
@@ -146,9 +146,6 @@ function ChargesExplained() {
           <h4>Delayed Payment Charges</h4>
           <p className="text-muted">
             Interest may be charged when payments due to the broker are delayed.
-            <a href="" style={{ textDecoration: "none" }}>
-              Learn more.
-            </a>
           </p>
         </div>
 
@@ -166,18 +163,12 @@ function ChargesExplained() {
       <div className="mt-4">
         <h4 className="mb-4 fs-6">Disclaimer</h4>
         <p className="text-muted">
-          For Delivery based trades, a minimum of ₹0.01 will be charged per
-          contract note. Clients who opt to receive physical contract notes will
-          be charged ₹20 per contract note plus courier charges. Brokerage will
-          not exceed the rates specified by SEBI and the exchanges. All
-          statutory and regulatory charges will be levied at actuals. Brokerage
-          is also charged on expired, exercised, and assigned options contracts.
-          Free investments are available only for our retail individual clients.
-          Companies, Partnerships, Trusts, and HUFs need to pay 0.1% or ₹20
-          (whichever is less) as delivery brokerage. A brokerage of 0.25% of the
-          contract value will be charged for contracts where physical delivery
-          happens. For netted off positions in physically settled contracts, a
-          brokerage of 0.1% will be charged.
+          The charges and explanations on this page are provided for reference
+          to illustrate Zerodha's pricing structure. Rates, eligibility, and
+          applicable statutory charges may change. This project is an
+          independent demo and is not affiliated with Zerodha or any broker. It
+          does not execute real trades, open brokerage accounts, or collect
+          brokerage fees.
         </p>
       </div>
     </div>

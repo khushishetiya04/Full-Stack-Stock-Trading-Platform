@@ -12,8 +12,8 @@ function Hero() {
         <h1 className="mt-5">Invest in everything</h1>
 
         <p>
-          Online platform to invest in stocks, derivatives, mutual funds, and
-          more.
+          Explore a stock trading demo with simulated trading workflows and an
+          interface inspired by online investment platforms.
         </p>
 
         <button

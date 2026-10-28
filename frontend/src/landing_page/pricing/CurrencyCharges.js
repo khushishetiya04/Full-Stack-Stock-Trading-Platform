@@ -3,6 +3,12 @@ import React from "react";
 function CurrencyCharges() {
   return (
     <div>
+      <p className="text-muted small mt-4">
+        Illustrative Zerodha pricing information for this clone. Rates and
+        statutory charges may change. This demo does not execute real trades or
+        charge brokerage.
+      </p>
+
       <div className="mt-4">
         <div className="row border-top border-start border-end border-bottom">
           <div className="col-2">
@@ -21,7 +27,7 @@ function CurrencyCharges() {
             </p>
           </div>
         </div>
-    
+
         <div className="row border-start border-end">
           <div className="col-2">
             <p className="mb-0 py-3">Brokerage</p>
@@ -37,7 +43,7 @@ function CurrencyCharges() {
             <p className="mb-0 py-3">Flat Rs. 20 per executed order</p>
           </div>
         </div>
-      
+
         <div className="row border-start border-end">
           <div className="col-2">
             <p className="mb-0 py-3">STT/CTT</p>
@@ -51,7 +57,7 @@ function CurrencyCharges() {
             <p className="mb-0 py-3">No STT</p>
           </div>
         </div>
-      
+
         <div className="row border-start border-end">
           <div className="col-2">
             <p className="mb-0 py-3">Transaction charges</p>
@@ -73,7 +79,7 @@ function CurrencyCharges() {
             </p>
           </div>
         </div>
-      
+
         <div className="row border-start border-end">
           <div className="col-2">
             <p className="mb-0 py-3">GST</p>
@@ -91,7 +97,7 @@ function CurrencyCharges() {
             </p>
           </div>
         </div>
-    
+
         <div className="row border-start border-end">
           <div className="col-2">
             <p className="mb-0 py-3">SEBI charges</p>
@@ -105,7 +111,7 @@ function CurrencyCharges() {
             <p className="mb-0 py-3">₹10 / crore</p>
           </div>
         </div>
-  
+
         <div className="row border-start border-end border-bottom">
           <div className="col-2">
             <p className="mb-0 py-3">Stamp charges</p>
@@ -114,7 +120,7 @@ function CurrencyCharges() {
           <div className="col-5">
             <p className="mb-0 py-3">0.0001% or ₹10 / crore on buy side</p>
           </div>
-          
+
           <div className="col-5">
             <p className="mb-0 py-3">0.0001% or ₹10 / crore on buy side</p>
           </div>

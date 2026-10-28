@@ -3,7 +3,11 @@ import React from "react";
 function AccountOpeningCharges() {
   return (
     <div className="container mt-5">
-      <h2>Charges for account opening</h2>
+      <h2>Zerodha Account Opening Charges</h2>
+      <p className="text-muted small mt-3">
+        Reference information for this Zerodha clone. Account opening fees may
+        change. This demo does not open real brokerage accounts.
+      </p>
 
       <div className="mt-4">
         <div className="row border-top border-bottom border-start border-end">

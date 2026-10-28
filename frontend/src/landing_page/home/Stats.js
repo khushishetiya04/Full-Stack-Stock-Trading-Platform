@@ -5,34 +5,38 @@ function Stats() {
     <div className="container p-3">
       <div className="row p-5">
         <div className="col-6 p-5">
-          <h1 className="fs-2 mb-5">Trust with confidence</h1>
+          <h1 className="fs-2 mb-5">Built for a Better Trading Experience</h1>
           <h2 className="fs-4">Customer-first always</h2>
           <p className="text-muted">
-            That's why 1.3+ crore customers trust Zerodha with &#8377;3.5+ lakh
-            crores worth of equity investments.
+            Explore a clean interface designed to demonstrate common stock
+            trading workflows and account information.
           </p>
           <h2 className="fs-4">No spam or gimmicks</h2>
           <p className="text-muted">
-            No gimmicks, spam, "gammification", or annoying push notifications.
-            High quality apps that you use at your pace, the way you like.
+            Experience a straightforward demo interface focused on essential
+            features without unnecessary distractions.
           </p>
           <h2 className="fs-4">The Zerodha universe</h2>
           <p className="text-muted">
-            Not just an app, but a whole ecosystem. Our investments in 30+
-            fintech startups offer you tailored services specific to your needs.
+            Explore the landing page and simulated trading dashboard inspired by
+            modern online investment platforms.
           </p>
           <h2 className="fs-4">Do better with money</h2>
           <p className="text-muted">
-            With initiatives like Nudge and Kill Switch, we don't just
-            facilitate transactions, but actively help you do better with your
-            money.
+            Learn how watchlists, holdings, orders, and profit-and-loss
+            summaries fit together in a simulated trading environment.
           </p>
         </div>
         <div className="col-6 p-5">
-          <img src="media/ecosystem.png" style={{ width: "90%" }} />
+          <img
+            src="/media/ecosystem.png"
+            style={{ width: "90%" }}
+            alt="Illustration of a stock trading platform ecosystem"
+          />
           <div className="text-center">
             <a href="" className="mx-5" style={{ textDecoration: "none" }}>
-              Explore our products <i className="fa-solid fa-arrow-right-long"></i>
+              Explore our products{" "}
+              <i className="fa-solid fa-arrow-right-long"></i>
             </a>
             <a href="" style={{ textDecoration: "none" }}>
               Try Kite demo<i className="fa-solid fa-arrow-right-long"></i>

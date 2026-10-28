@@ -27,31 +27,13 @@ function CreateTicket() {
 
             <div className="collapse" id="accountOpening">
               <div className="border-top px-5 py-4">
-                <p>
-                  <a href="#" className="text-decoration-none">
-                    • Resident individual
-                  </a>
+                <p className="text-muted">• Resident individual</p>
+                <p className="text-muted">• Minor</p>
+                <p className="text-muted">• Non Resident Indian (NRI)</p>
+                <p className="text-muted">
+                  • Company, Partnership, HUF and LLP
                 </p>
-                <p>
-                  <a href="#" className="text-decoration-none">
-                    • Minor
-                  </a>
-                </p>
-                <p>
-                  <a href="#" className="text-decoration-none">
-                    • Non Resident Indian (NRI)
-                  </a>
-                </p>
-                <p>
-                  <a href="#" className="text-decoration-none">
-                    • Company, Partnership, HUF and LLP
-                  </a>
-                </p>
-                <p className="mb-0">
-                  <a href="#" className="text-decoration-none">
-                    • Glossary
-                  </a>
-                </p>
+                <p className="text-muted mb-0">• Glossary</p>
               </div>
             </div>
           </div>
@@ -78,30 +60,14 @@ function CreateTicket() {
 
             <div className="collapse" id="zerodhaAccount">
               <div className="border-top px-5 py-4">
-                <p>
-                  <a href="#" className="text-decoration-none">
-                    • Your Profile
-                  </a>
+                <p className="text-muted">• Your Profile</p>
+                <p className="text-muted">• Account modification</p>
+                <p className="text-muted">
+                  • Client Master Report (CMR) and Depository Participant (DP)
                 </p>
-                <p>
-                  <a href="#" className="text-decoration-none">
-                    • Account modification
-                  </a>
-                </p>
-                <p>
-                  <a href="#" className="text-decoration-none">
-                    • Client Master Report (CMR) and Depository Participant (DP)
-                  </a>
-                </p>
-                <p>
-                  <a href="#" className="text-decoration-none">
-                    • Nomination
-                  </a>
-                </p>
-                <p className="mb-0">
-                  <a href="#" className="text-decoration-none">
-                    • Transfer and conversion of securities
-                  </a>
+                <p className="text-muted">• Nomination</p>
+                <p className="text-muted mb-0">
+                  • Transfer and conversion of securities
                 </p>
               </div>
             </div>
@@ -129,36 +95,14 @@ function CreateTicket() {
 
             <div className="collapse" id="kite">
               <div className="border-top px-5 py-4">
-                <p>
-                  <a href="#" className="text-decoration-none">
-                    • IPO
-                  </a>
+                <p className="text-muted">• IPO</p>
+                <p className="text-muted">• Trading FAQs</p>
+                <p className="text-muted">
+                  • Margin Trading Facility (MTF) and Margins
                 </p>
-                <p>
-                  <a href="#" className="text-decoration-none">
-                    • Trading FAQs
-                  </a>
-                </p>
-                <p>
-                  <a href="#" className="text-decoration-none">
-                    • Margin Trading Facility (MTF) and Margins
-                  </a>
-                </p>
-                <p>
-                  <a href="#" className="text-decoration-none">
-                    • Charts and orders
-                  </a>
-                </p>
-                <p>
-                  <a href="#" className="text-decoration-none">
-                    • Alerts and Nudges
-                  </a>
-                </p>
-                <p className="mb-0">
-                  <a href="#" className="text-decoration-none">
-                    • General
-                  </a>
-                </p>
+                <p className="text-muted">• Charts and orders</p>
+                <p className="text-muted">• Alerts and Nudges</p>
+                <p className="text-muted mb-0">• General</p>
               </div>
             </div>
           </div>
@@ -185,26 +129,10 @@ function CreateTicket() {
 
             <div className="collapse" id="funds">
               <div className="border-top px-5 py-4">
-                <p>
-                  <a href="#" className="text-decoration-none">
-                    • Add money
-                  </a>
-                </p>
-                <p>
-                  <a href="#" className="text-decoration-none">
-                    • Withdraw money
-                  </a>
-                </p>
-                <p>
-                  <a href="#" className="text-decoration-none">
-                    • Add bank accounts
-                  </a>
-                </p>
-                <p className="mb-0">
-                  <a href="#" className="text-decoration-none">
-                    • eMandates
-                  </a>
-                </p>
+                <p className="text-muted">• Add money</p>
+                <p className="text-muted">• Withdraw money</p>
+                <p className="text-muted">• Add bank accounts</p>
+                <p className="text-muted mb-0">• eMandates</p>
               </div>
             </div>
           </div>
@@ -231,36 +159,12 @@ function CreateTicket() {
 
             <div className="collapse" id="console">
               <div className="border-top px-5 py-4">
-                <p>
-                  <a href="#" className="text-decoration-none">
-                    • Portfolio
-                  </a>
-                </p>
-                <p>
-                  <a href="#" className="text-decoration-none">
-                    • Corporate actions
-                  </a>
-                </p>
-                <p>
-                  <a href="#" className="text-decoration-none">
-                    • Funds statement
-                  </a>
-                </p>
-                <p>
-                  <a href="#" className="text-decoration-none">
-                    • Reports
-                  </a>
-                </p>
-                <p>
-                  <a href="#" className="text-decoration-none">
-                    • Profile
-                  </a>
-                </p>
-                <p className="mb-0">
-                  <a href="#" className="text-decoration-none">
-                    • Segments
-                  </a>
-                </p>
+                <p className="text-muted">• Portfolio</p>
+                <p className="text-muted">• Corporate actions</p>
+                <p className="text-muted">• Funds statement</p>
+                <p className="text-muted">• Reports</p>
+                <p className="text-muted">• Profile</p>
+                <p className="text-muted mb-0">• Segments</p>
               </div>
             </div>
           </div>
@@ -287,36 +191,12 @@ function CreateTicket() {
 
             <div className="collapse" id="coin">
               <div className="border-top px-5 py-4">
-                <p>
-                  <a href="#" className="text-decoration-none">
-                    • Mutual funds
-                  </a>
-                </p>
-                <p>
-                  <a href="#" className="text-decoration-none">
-                    • National Pension Scheme (NPS)
-                  </a>
-                </p>
-                <p>
-                  <a href="#" className="text-decoration-none">
-                    • Fixed Deposit (FD)
-                  </a>
-                </p>
-                <p>
-                  <a href="#" className="text-decoration-none">
-                    • Features on Coin
-                  </a>
-                </p>
-                <p>
-                  <a href="#" className="text-decoration-none">
-                    • Payments and Orders
-                  </a>
-                </p>
-                <p className="mb-0">
-                  <a href="#" className="text-decoration-none">
-                    • General
-                  </a>
-                </p>
+                <p className="text-muted">• Mutual funds</p>
+                <p className="text-muted">• National Pension Scheme (NPS)</p>
+                <p className="text-muted">• Fixed Deposit (FD)</p>
+                <p className="text-muted">• Features on Coin</p>
+                <p className="text-muted">• Payments and Orders</p>
+                <p className="text-muted mb-0">• General</p>
               </div>
             </div>
           </div>
@@ -330,47 +210,33 @@ function CreateTicket() {
               minHeight: "210px",
             }}
           >
-            <a href="">
-              • Revision in Market Lot of Derivative Contracts on Indices from
+            <p className="mb-3">
+              • Revision in market lot of derivative contracts on indices from
               October 30, 2026
-            </a>
-            <br />
-            <br />
-            <a href="">• Latest Intraday leverages and Square-off timings</a>
+            </p>
+            <p className="mb-0">
+              • Latest intraday leverage and square-off timings
+            </p>
           </div>
 
           <div className="border">
             <h5 className="p-4 mb-0">Quick links</h5>
-            <a
-              href="#"
-              className="text-decoration-none d-block px-4 py-3 border-top"
-            >
+
+            <p className="px-4 py-3 border-top mb-0 text-muted">
               1. Track account opening
-            </a>
-            <a
-              href="#"
-              className="text-decoration-none d-block px-4 py-3 border-top"
-            >
+            </p>
+            <p className="px-4 py-3 border-top mb-0 text-muted">
               2. Track segment activation
-            </a>
-            <a
-              href="#"
-              className="text-decoration-none d-block px-4 py-3 border-top"
-            >
+            </p>
+            <p className="px-4 py-3 border-top mb-0 text-muted">
               3. Intraday margins
-            </a>
-            <a
-              href="#"
-              className="text-decoration-none d-block px-4 py-3 border-top"
-            >
+            </p>
+            <p className="px-4 py-3 border-top mb-0 text-muted">
               4. Kite user manual
-            </a>
-            <a
-              href="#"
-              className="text-decoration-none d-block px-4 py-3 border-top"
-            >
+            </p>
+            <p className="px-4 py-3 border-top mb-0 text-muted">
               5. Learn how to create a ticket
-            </a>
+            </p>
           </div>
         </div>
       </div>

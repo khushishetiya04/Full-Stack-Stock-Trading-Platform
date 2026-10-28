@@ -1,18 +1,20 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Pricing() {
   return (
     <div className="container">
       <div className="row">
         <div className="col-4">
-          <h1 className="mb-3 fs-2">Unbeatable pricing</h1>
+          <h1 className="mb-3 fs-2">Transparent Pricing</h1>
           <p>
-            We pioneered the concept of discount broking and price transparency
-            in India. Flat fees and no hidden charges.
+            Explore reference pricing for brokerage services. This demo
+            simulates trading workflows and does not execute real trades or
+            charge brokerage.
           </p>
-          <a href="" style={{ textDecoration: "none" }}>
+          <Link to="/pricing" style={{ textDecoration: "none" }}>
             See pricing <i className="fa-solid fa-arrow-right-long"></i>
-          </a>
+          </Link>
         </div>
         <div className="col-2"></div>
         <div className="col-6 mb-5">

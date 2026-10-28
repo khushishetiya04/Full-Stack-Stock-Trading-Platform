@@ -1,3 +1,4 @@
+
 import React from "react";
 
 function LeftSection({
@@ -10,23 +11,27 @@ function LeftSection({
   googlePlay,
   appStore,
 }) {
+  const hasValidLink = (url) => url && url !== "#";
+
   return (
     <div className="container mt-5">
       <div className="row">
         <div className="col-6">
-          <img src={imageURL} />
+          <img src={imageURL} alt={productName} />
         </div>
+
         <div className="col-6 p-5 mt-5">
           <h1>{productName}</h1>
           <p>{productDescription}</p>
+
           <div>
-            {linkText && linkURL && (
+            {linkText && hasValidLink(linkURL) && (
               <a href={linkURL} style={{ textDecoration: "none" }}>
                 {linkText} <i className="fa-solid fa-arrow-right-long"></i>
               </a>
             )}
 
-            {learnMore && (
+            {hasValidLink(learnMore) && (
               <a
                 href={learnMore}
                 style={{
@@ -38,16 +43,23 @@ function LeftSection({
               </a>
             )}
           </div>
+
           <div className="mt-3">
-            <a href={googlePlay}>
-              <img src="/media/googlePlayBadge.svg" />
-            </a>
-            <a href={appStore}>
-              <img
-                src="/media/appstoreBadge.svg"
-                style={{ marginLeft: "50px" }}
-              />
-            </a>
+            {hasValidLink(googlePlay) && (
+              <a href={googlePlay}>
+                <img src="/media/googlePlayBadge.svg" alt="Get it on Google Play" />
+              </a>
+            )}
+
+            {hasValidLink(appStore) && (
+              <a href={appStore}>
+                <img
+                  src="/media/appstoreBadge.svg"
+                  alt="Download on the App Store"
+                  style={{ marginLeft: "50px" }}
+                />
+              </a>
+            )}
           </div>
         </div>
       </div>

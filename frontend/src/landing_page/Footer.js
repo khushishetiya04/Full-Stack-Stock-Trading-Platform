@@ -6,80 +6,62 @@ function Footer() {
       <div className="container border-top mt-5">
         <div className="row mt-5">
           <div className="col">
-            <img src="/media/logo.svg" style={{ width: "50%" }} />
+            <img
+              src="/media/logo.svg"
+              style={{ width: "50%" }}
+              alt="Stock trading demo"
+            />
             <p>&copy; 2026 Full Stack Stock Trading Platform.</p>
           </div>
           <div className="col">
             <p>Company</p>
-            <a href="" className="footer-link">
+            <a href="/about" className="footer-link">
               About
             </a>
             <br />
-            <a href="" className="footer-link">
+            <a href="/product" className="footer-link">
               Products
             </a>
             <br />
-            <a href="" className="footer-link">
+            <a href="/pricing" className="footer-link">
               Pricing
             </a>
             <br />
-            <a href="" className="footer-link">
-              Referral programme
-            </a>
+            <span className="footer-link">Referral programme</span>
             <br />
-            <a href="" className="footer-link">
-              Careers
-            </a>
+            <span className="footer-link">Careers</span>
             <br />
-            <a href="" className="footer-link">
-              Zerodha.tech
-            </a>
+            <span className="footer-link">Zerodha.tech</span>
             <br />
-            <a href="" className="footer-link">
-              Press & media
-            </a>
+            <span className="footer-link">Press & media</span>
             <br />
-            <a href="" className="footer-link">
-              Zerodha cares (CSR)
-            </a>
+            <span className="footer-link">Zerodha cares (CSR)</span>
             <br />
           </div>
           <div className="col">
             <p>Support</p>
-            <a href="" className="footer-link">
-              Contact
-            </a>
+            <span className="footer-link">Contact</span>
             <br />
-            <a href="" className="footer-link">
+            <a href="/support" className="footer-link">
               Support portal
             </a>
             <br />
-            <a href="" className="footer-link">
-              Z-Connect blog
-            </a>
+            <span className="footer-link">Z-Connect blog</span>
             <br />
-            <a href="" className="footer-link">
-              List of charges
-            </a>
+            <span className="footer-link">List of charges</span>
             <br />
-            <a href="" className="footer-link">
-              Downloads & resources
-            </a>
+            <span className="footer-link">Downloads & resources</span>
             <br />
           </div>
           <div className="col">
             <p>Account</p>
-            <a href="" className="footer-link">
+            <a href="/signup" className="footer-link">
               Open an account
             </a>
             <br />
-            <a href="" className="footer-link">
-              Fund transfer
-            </a>
+            <span className="footer-link">Fund transfer</span>
             <br />
-            <a href="" className="footer-link">
-              60 day challenge
-            </a>
+            <span className="footer-link">60 day challenge</span>
             <br />
           </div>
         </div>
@@ -90,56 +72,14 @@ function Footer() {
             Prices are for demonstration only and nothing here is investment
             advice.
           </p>
-          <p>
-            Procedure to file a complaint on SEBI SCORES/SMARTODR: Register on
-            SCORES portal & SMARTODR. Mandatory details for filing complaints on
-            SCORES: Name, PAN, Address, Mobile Number, E-mail ID. Benefits:
-            Effective Communication, Speedy redressal of grievances
-          </p>
-          <p>
-            Investments in securities market are subject to market risks; read
-            all the related documents carefully before investing.
-          </p>
-          <p>
-            Prevent unauthorised transactions in your account. Update your
-            mobile numbers/email IDs with your stock brokers/depository
-            participants. Receive information of your transactions directly from
-            Exchange/Depositories on your mobile/email at the end of the day.
-            Issued in the interest of investors. KYC is one time exercise while
-            dealing in securities markets - once KYC is done through a SEBI
-            registered intermediary (broker, DP, Mutual Fund etc.), you need not
-            undergo the same process again when you approach another
-            intermediary. Dear Investor, if you are subscribing to an IPO, there
-            is no need to issue a cheque. Please write the Bank account number
-            and sign the IPO application form to authorize your bank to make
-            payment in case of allotment. In case of non allotment the funds
-            will remain in your bank account. As a business we don't give stock
-            tips, and have not authorized anyone to trade on behalf of others.
-            If you find anyone claiming to be part of Zerodha and offering such
-            services, please create a ticket here.
-          </p>
           <div className="text-center">
-            <a href="" className="footer-link p-2">
-              NSE
-            </a>
-            <a href="" className="footer-link p-2">
-              BSE
-            </a>
-            <a href="" className="footer-link p-2">
-              MCX
-            </a>
-            <a href="" className="footer-link p-2">
-              Terms & conditions
-            </a>
-            <a href="" className="footer-link p-2">
-              Policies & Procedures
-            </a>
-            <a href="" className="footer-link p-2">
-              Privacy policy
-            </a>
-            <a href="" className="footer-link p-2">
-              Disclosure
-            </a>
+            <span className="footer-link">NSE</span>
+            <span className="footer-link">BSE</span>
+            <span className="footer-link">MCX</span>
+            <span className="footer-link">Terms & conditions</span>
+            <span className="footer-link">Policies & Procedures</span>
+            <span className="footer-link">Privacy policy</span>
+            <span className="footer-link">Disclosure</span>
           </div>
         </div>
       </div>

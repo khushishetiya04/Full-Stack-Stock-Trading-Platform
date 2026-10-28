@@ -1,27 +1,32 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function Universe() {
+  const navigate = useNavigate();
+
   return (
     <div className="container">
       <div className="row text-center">
         <h1 className="mt-5">The Zerodha Universe</h1>
         <p>
-          Extend your trading and investment experience even further with our
-          partner platforms
+          Explore the Zerodha ecosystem and its associated investment and
+          trading platforms.
         </p>
         <div className="col-4 p-3 mt-5">
           <img
             src="/media/zerodhafundhouse.png"
+            alt="Zerodha Fund House logo"
             style={{ width: "150px", height: "50px", objectFit: "contain" }}
           />
           <p className="text-small text-muted">
-            Our asset management venture that is creating simple and transparent
-            index funds to help you save for your goals.
+            Zerodha Fund House focuses on simple and transparent index funds to
+            help investors work toward their financial goals.
           </p>
         </div>
         <div className="col-4 p-3 mt-5">
           <img
             src="/media/sensibullLogo.svg"
+            alt="Sensibull logo"
             style={{ width: "150px", height: "50px", objectFit: "contain" }}
           />
           <p className="text-small text-muted">
@@ -33,6 +38,7 @@ function Universe() {
         <div className="col-4 p-3 mt-5">
           <img
             src="/media/tijoriLogo.svg"
+            alt="Tijori logo"
             style={{ width: "150px", height: "50px", objectFit: "contain" }}
           />
           <p className="text-small text-muted">
@@ -43,6 +49,7 @@ function Universe() {
         <div className="col-4 p-3 mt-5">
           <img
             src="/media/streakLogo.png"
+            alt="Streak logo"
             style={{ width: "150px", height: "50px", objectFit: "contain" }}
           />
           <p className="text-small text-muted">
@@ -53,6 +60,7 @@ function Universe() {
         <div className="col-4 p-3 mt-5">
           <img
             src="/media/smallcaseLogo.png"
+            alt="smallcase logo"
             style={{ width: "150px", height: "50px", objectFit: "contain" }}
           />
           <p className="text-small text-muted">
@@ -63,6 +71,7 @@ function Universe() {
         <div className="col-4 p-3 mt-5">
           <img
             src="/media/dittoLogo.png"
+            alt="Ditto insurance logo"
             style={{ width: "150px", height: "50px", objectFit: "contain" }}
           />
           <p className="text-small text-muted">
@@ -73,6 +82,7 @@ function Universe() {
         <button
           className="p-2 btn btn-primary fs-5 mb-5"
           style={{ width: "20%", margin: "0 auto" }}
+          onClick={() => navigate("/signup")}
         >
           Signup
         </button>

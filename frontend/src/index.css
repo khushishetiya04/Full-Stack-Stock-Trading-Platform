@@ -16,9 +16,12 @@ code {
   margin-left: 40px;
 }
 
-.footer-link{
+.footer-link {
   text-decoration: none;
   color: #6c757d;
   margin-right: 20px;
 }
 
+a.footer-link:hover {
+  color: #387ed1;
+}

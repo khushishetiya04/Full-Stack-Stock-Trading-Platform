@@ -3,6 +3,12 @@ import React from "react";
 function CommodityCharges() {
   return (
     <div>
+      <p className="text-muted small mt-4">
+        Illustrative Zerodha pricing information for this clone. Rates and
+        statutory charges may change. This demo does not execute real trades or
+        charge brokerage.
+      </p>
+
       <div className="mt-4">
         <div className="row border-top border-start border-end border-bottom">
           <div className="col-2">

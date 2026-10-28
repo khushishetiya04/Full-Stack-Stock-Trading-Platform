@@ -42,13 +42,9 @@ function ChargesTabs() {
       {activeTab === "currency" && <CurrencyCharges />}
       {activeTab === "commodity" && <CommodityCharges />}
 
-      <div className="text-center mt-5 mb-5">
-        <a
-          href="https://zerodha.com/brokerage-calculator"
-          style={{ textDecoration: "none" }}
-        >
-          Calculate your costs upfront using our brokerage calculator
-        </a>
+      <div className="text-center mt-5 mb-5 text-muted">
+        Brokerage charges shown here are for reference. This demo does not
+        execute real trades or charge brokerage.
       </div>
     </div>
   );

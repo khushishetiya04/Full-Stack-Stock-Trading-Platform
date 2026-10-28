@@ -3,6 +3,12 @@ import React from "react";
 function EquityCharges() {
   return (
     <div>
+      <p className="text-muted small mt-4">
+        Illustrative Zerodha pricing information for this clone. Rates and
+        statutory charges may change. This demo does not execute real trades or
+        charge brokerage.
+      </p>
+
       <div className="mt-4">
         <div className="row border-top border-start border-end border-bottom">
           <div style={{ width: "16.67%" }}>
@@ -42,7 +48,7 @@ function EquityCharges() {
           </div>
 
           <div style={{ width: "20.83%" }}>
-            <p className="mb-0 py-3">Zero Brokerage</p>
+            <p className="mb-0 py-3">₹0</p>
           </div>
 
           <div style={{ width: "20.83%" }}>

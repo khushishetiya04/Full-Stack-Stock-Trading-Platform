@@ -3,7 +3,12 @@ import React from "react";
 function OptionalServices() {
   return (
     <div className="container mt-5">
-      <h2>Charges for optional value added services</h2>
+      <h2>Zerodha Optional Value-Added Services</h2>
+      <p className="text-muted small mt-3">
+        Reference pricing for this Zerodha clone. Third-party service prices and
+        terms may change. This demo does not provide or charge for these
+        services.
+      </p>
       <div className="mt-4">
         <div className="row border-top border-start border-end border-bottom">
           <div className="col-2">
