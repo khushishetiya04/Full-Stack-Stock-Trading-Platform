@@ -4,7 +4,7 @@ function Hero() {
   return (
     <div className="container">
       <div className="row p-5 mt-5 text-center">
-        <h1>Zerodha Charges</h1>
+        <h1>Brokerage and Charges: Reference Guide</h1>
         <h3 className="text-muted mt-3 fs-5">List of all charges and taxes</h3>
       </div>
       <div className="row p-5 mt-3 text-center">
@@ -27,9 +27,8 @@ function Hero() {
           />
           <h1 className="fs-3">Intraday and F&O trades</h1>
           <p className="text-muted">
-            Flat ₹ 20 or 0.03% (whichever is lower) per executed order on
-            intraday trades across equity, currency, and commodity trades. Flat
-            ₹20 on all option trades.
+            Brokerage rates vary by trade type and applicable terms. Refer to
+            the broker's latest tariff for current rates and charges.
           </p>
         </div>
 

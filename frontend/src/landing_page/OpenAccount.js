@@ -6,7 +6,7 @@ function OpenAccount() {
   return (
     <div className="container p-5 mb-5">
       <div className="row text-center">
-        <h1 className="mt-5">Open a Zerodha account</h1>
+        <h1 className="mt-5">Explore the Trading Demo</h1>
         <p>
           Explore the features of this stock trading demo, built for learning
           and demonstrating simulated trading workflows.

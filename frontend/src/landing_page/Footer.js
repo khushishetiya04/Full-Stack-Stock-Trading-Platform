@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
@@ -13,58 +14,64 @@ function Footer() {
             />
             <p>&copy; 2026 Full Stack Stock Trading Platform.</p>
           </div>
+
           <div className="col">
             <p>Company</p>
-            <a href="/about" className="footer-link">
+            <Link to="/about" className="footer-link">
               About
-            </a>
+            </Link>
             <br />
-            <a href="/product" className="footer-link">
+            <Link to="/product" className="footer-link">
               Products
-            </a>
+            </Link>
             <br />
-            <a href="/pricing" className="footer-link">
+            <Link to="/pricing" className="footer-link">
               Pricing
-            </a>
+            </Link>
             <br />
-            <span className="footer-link">Referral programme</span>
+            <span>Referral programme</span>
             <br />
-            <span className="footer-link">Careers</span>
+            <span>Careers</span>
             <br />
-            <span className="footer-link">Zerodha.tech</span>
+            <span>Zerodha.tech</span>
             <br />
-            <span className="footer-link">Press & media</span>
+            <span>Press &amp; media</span>
             <br />
-            <span className="footer-link">Zerodha cares (CSR)</span>
+            <span>Zerodha cares (CSR)</span>
             <br />
           </div>
+
           <div className="col">
             <p>Support</p>
-            <span className="footer-link">Contact</span>
+            <span>Contact</span>
             <br />
-            <a href="/support" className="footer-link">
+            <Link to="/support" className="footer-link">
               Support portal
-            </a>
+            </Link>
             <br />
-            <span className="footer-link">Z-Connect blog</span>
+            <span>Z-Connect blog</span>
             <br />
-            <span className="footer-link">List of charges</span>
+            <Link to="/pricing" className="footer-link">
+              List of charges
+            </Link>
             <br />
-            <span className="footer-link">Downloads & resources</span>
+            <span>Downloads &amp; resources</span>
             <br />
           </div>
+
           <div className="col">
             <p>Account</p>
-            <a href="/signup" className="footer-link">
-              Open an account
-            </a>
+            <Link to="/signup" className="footer-link">
+              Create demo account
+            </Link>
             <br />
-            <span className="footer-link">Fund transfer</span>
+            <span>Fund transfer</span>
             <br />
-            <span className="footer-link">60 day challenge</span>
+            <span>60 day challenge</span>
             <br />
           </div>
         </div>
+
         <div className="mt-5 text-muted" style={{ fontSize: "14px" }}>
           <p>
             Independent demo project with simulated trading only. Not affiliated
@@ -72,14 +79,15 @@ function Footer() {
             Prices are for demonstration only and nothing here is investment
             advice.
           </p>
+
           <div className="text-center">
-            <span className="footer-link">NSE</span>
-            <span className="footer-link">BSE</span>
-            <span className="footer-link">MCX</span>
-            <span className="footer-link">Terms & conditions</span>
-            <span className="footer-link">Policies & Procedures</span>
-            <span className="footer-link">Privacy policy</span>
-            <span className="footer-link">Disclosure</span>
+            <span>NSE</span>
+            <span className="ms-3">BSE</span>
+            <span className="ms-3">MCX</span>
+            <span className="ms-3">Terms &amp; conditions</span>
+            <span className="ms-3">Policies &amp; Procedures</span>
+            <span className="ms-3">Privacy policy</span>
+            <span className="ms-3">Disclosure</span>
           </div>
         </div>
       </div>

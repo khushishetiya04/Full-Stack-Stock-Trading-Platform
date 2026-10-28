@@ -1,5 +1,5 @@
-
 import React from "react";
+import { Link } from "react-router-dom";
 
 function LeftSection({
   imageURL,
@@ -13,11 +13,37 @@ function LeftSection({
 }) {
   const hasValidLink = (url) => url && url !== "#";
 
+  const isInternalLink = (url) => url && url.startsWith("/");
+
+  const renderLink = (url, text, className = "") => {
+    if (!hasValidLink(url)) return null;
+
+    const content = (
+      <>
+        {text} <i className="fa-solid fa-arrow-right-long"></i>
+      </>
+    );
+
+    return isInternalLink(url) ? (
+      <Link to={url} className={className} style={{ textDecoration: "none" }}>
+        {content}
+      </Link>
+    ) : (
+      <a href={url} className={className} style={{ textDecoration: "none" }}>
+        {content}
+      </a>
+    );
+  };
+
   return (
     <div className="container mt-5">
-      <div className="row">
+      <div className="row align-items-center">
         <div className="col-6">
-          <img src={imageURL} alt={productName} />
+          <img
+            src={imageURL}
+            alt={`${productName} product illustration`}
+            className="img-fluid"
+          />
         </div>
 
         <div className="col-6 p-5 mt-5">
@@ -25,29 +51,19 @@ function LeftSection({
           <p>{productDescription}</p>
 
           <div>
-            {linkText && hasValidLink(linkURL) && (
-              <a href={linkURL} style={{ textDecoration: "none" }}>
-                {linkText} <i className="fa-solid fa-arrow-right-long"></i>
-              </a>
-            )}
+            {linkText && renderLink(linkURL, linkText)}
 
-            {hasValidLink(learnMore) && (
-              <a
-                href={learnMore}
-                style={{
-                  marginLeft: "50px",
-                  textDecoration: "none",
-                }}
-              >
-                Learn More <i className="fa-solid fa-arrow-right-long"></i>
-              </a>
-            )}
+            {renderLink(learnMore, "Learn More", "ms-5")}
           </div>
 
           <div className="mt-3">
             {hasValidLink(googlePlay) && (
               <a href={googlePlay}>
-                <img src="/media/googlePlayBadge.svg" alt="Get it on Google Play" />
+                <img
+                  src="/media/googlePlayBadge.svg"
+                  alt="Get it on Google Play"
+                  className="img-fluid"
+                />
               </a>
             )}
 
@@ -56,7 +72,7 @@ function LeftSection({
                 <img
                   src="/media/appstoreBadge.svg"
                   alt="Download on the App Store"
-                  style={{ marginLeft: "50px" }}
+                  className="img-fluid ms-5"
                 />
               </a>
             )}

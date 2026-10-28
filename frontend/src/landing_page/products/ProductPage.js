@@ -9,53 +9,62 @@ function ProductPage() {
   return (
     <>
       <Hero />
+
       <LeftSection
         imageURL="/media/kite.png"
         productName="Kite"
-        productDescription="Zerodha's ultra-fast flagship trading platform with streaming market data, advanced charts, an elegant UI, and more. Enjoy the Kite experience seamlessly on your Android and iOS devices."
-        linkText="Try Demo"
-        linkURL="#"
-        learnMore="#"
-        googlePlay="#"
-        appStore="#"
-      />
-      <RightSection
-        imageURL="/media/console.png"
-        productName="Console"
-        productDescription="The central dashboard for your Zerodha account. Gain insights into your trades and investments with in-depth reports and visualisations."
-        linkText="Learn More"
-        linkURL="#"
-      />
-      <LeftSection
-        imageURL="/media/coin.png"
-        productName="Coin"
-        productDescription="Buy direct mutual funds online, commission-free, delivered directly to your Demat account. Enjoy the investment experience on your Android and iOS devices."
-        linkText="Coin"
-        linkURL="#"
-        learnMore=""
-        googlePlay="#"
-        appStore="#"
-      />
-      <RightSection
-        imageURL="/media/kiteconnect.png"
-        productName="Kite Connect API"
-        productDescription="Build powerful trading platforms and experiences with Zerodha's HTTP/JSON APIs. This product provides APIs for developers building trading and investment applications."
-        linkText="Kite Connect"
-        linkURL="#"
-      />
-      <LeftSection
-        imageURL="/media/varsity.png"
-        productName="Varsity mobile"
-        productDescription="An easy to grasp, collection of stock market lessons with in-depth coverage and illustrations. Content is broken down into bite-size cards to help you learn on the go."
-        tryDemo=""
+        productDescription="Zerodha's flagship trading platform offers streaming market data, advanced charts, and a clean interface. This independent project includes its own simulated trading dashboard for learning and demonstration."
+        linkText="Try Trading Demo"
+        linkURL="/login"
         learnMore=""
         googlePlay=""
         appStore=""
       />
+
+      <RightSection
+        imageURL="/media/console.png"
+        productName="Console"
+        productDescription="Console is Zerodha's central dashboard for account insights, trade analysis, and investment reports. This section describes Zerodha's product and is not a live integration."
+        linkText=""
+        linkURL=""
+      />
+
+      <LeftSection
+        imageURL="/media/coin.png"
+        productName="Coin"
+        productDescription="Coin is Zerodha's platform for investing in direct mutual funds. This independent project does not offer mutual fund purchases or connect to Coin."
+        linkText=""
+        linkURL=""
+        learnMore=""
+        googlePlay=""
+        appStore=""
+      />
+
+      <RightSection
+        imageURL="/media/kiteconnect.png"
+        productName="Kite Connect API"
+        productDescription="Kite Connect provides APIs for developers building trading and investment applications. This project is an independent simulation and does not integrate with the Kite Connect API."
+        linkText=""
+        linkURL=""
+      />
+
+      <LeftSection
+        imageURL="/media/varsity.png"
+        productName="Varsity"
+        productDescription="Zerodha Varsity provides educational material covering stock markets and investing through lessons and illustrations. This project does not host or reproduce the full Varsity learning platform."
+        linkText=""
+        linkURL=""
+        learnMore=""
+        googlePlay=""
+        appStore=""
+      />
+
       <p className="text-center mt-5 mb-5">
-        Want to know more about Zerodha's technology stack? Check out the Zerodha.tech
-        blog.
+        Product names and descriptions refer to Zerodha's services. This
+        independent demo project is not affiliated with Zerodha and does not
+        provide access to its products.
       </p>
+
       <Universe />
     </>
   );

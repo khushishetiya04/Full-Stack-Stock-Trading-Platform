@@ -211,8 +211,7 @@ function CreateTicket() {
             }}
           >
             <p className="mb-3">
-              • Revision in market lot of derivative contracts on indices from
-              October 30, 2026
+              • Important updates about trading and market regulations
             </p>
             <p className="mb-0">
               • Latest intraday leverage and square-off timings
