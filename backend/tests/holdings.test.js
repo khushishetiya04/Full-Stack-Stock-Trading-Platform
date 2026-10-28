@@ -39,6 +39,16 @@ describe("Holdings API", () => {
         price: 3300,
         net: "+3.13%",
         day: "+1.2%",
+        toObject() {
+          return {
+            name: this.name,
+            qty: this.qty,
+            avg: this.avg,
+            price: this.price,
+            net: this.net,
+            day: this.day,
+          };
+        },
       },
     ];
 
@@ -49,7 +59,16 @@ describe("Holdings API", () => {
       .set("Cookie", `token=${token}`);
 
     expect(response.status).toBe(200);
-    expect(response.body).toEqual(holdings);
+    expect(response.body).toEqual([
+      {
+        name: "TCS",
+        qty: 5,
+        avg: 3200,
+        price: 3194.8,
+        net: "-0.16%",
+        day: "+1.2%",
+      },
+    ]);
 
     expect(HoldingsModel.find).toHaveBeenCalledWith({
       userId: "user123",
