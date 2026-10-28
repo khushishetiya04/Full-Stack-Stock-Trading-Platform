@@ -10,7 +10,7 @@ function Hero() {
       <div className="row p-5 mt-3 text-center">
         <div className="col-4 p-4">
           <img
-            src="/media/pricingequity.svg"
+            src="/media/pricingEquity.svg"
             alt="Equity brokerage pricing illustration"
           />
           <h1 className="fs-3">Free equity delivery</h1>
@@ -34,7 +34,7 @@ function Hero() {
 
         <div className="col-4 p-4">
           <img
-            src="/media/pricingequity.svg"
+            src="/media/pricingMF.svg"
             alt="Equity brokerage pricing illustration"
           />
           <h1 className="fs-3">Free direct MF</h1>
