@@ -180,6 +180,23 @@ describe("Authentication API", () => {
       expect(response.status).toBe(400);
     });
 
+    test("rejects a name containing only symbols", async () => {
+      const response = await request(app).post("/api/auth/register").send({
+        name: "{}",
+        email: "test@example.com",
+        password: "password123",
+      });
+
+      expect(response.status).toBe(400);
+      expect(response.body.message).toBe(
+        "Please provide a valid name and email.",
+      );
+
+      expect(UsersModel.findOne).not.toHaveBeenCalled();
+      expect(UsersModel.create).not.toHaveBeenCalled();
+      expect(FundsModel.create).not.toHaveBeenCalled();
+    });
+
     test("rejects a password shorter than 8 characters", async () => {
       const response = await request(app).post("/api/auth/register").send({
         name: "Test User",

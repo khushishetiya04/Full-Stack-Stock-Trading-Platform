@@ -29,7 +29,7 @@ router.post("/register", async (req, res) => {
     const normalizedEmail = email.trim().toLowerCase();
 
     if (
-      !normalizedName ||
+      !/\p{L}/u.test(normalizedName) ||
       !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)
     ) {
       return res.status(400).json({
