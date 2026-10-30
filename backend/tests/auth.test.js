@@ -117,6 +117,46 @@ describe("Authentication API", () => {
       );
     });
 
+    test("rejects an object as name", async () => {
+      const response = await request(app)
+        .post("/api/auth/register")
+        .send({
+          name: { first: "Test" },
+          email: "test@example.com",
+          password: "password123",
+        });
+
+      expect(response.status).toBe(400);
+      expect(UsersModel.findOne).not.toHaveBeenCalled();
+      expect(UsersModel.create).not.toHaveBeenCalled();
+    });
+
+    test("rejects an array as email", async () => {
+      const response = await request(app)
+        .post("/api/auth/register")
+        .send({
+          name: "Test User",
+          email: ["test@example.com"],
+          password: "password123",
+        });
+
+      expect(response.status).toBe(400);
+      expect(UsersModel.findOne).not.toHaveBeenCalled();
+      expect(UsersModel.create).not.toHaveBeenCalled();
+    });
+
+    test("rejects a number as password", async () => {
+      const response = await request(app).post("/api/auth/register").send({
+        name: "Test User",
+        email: "test@example.com",
+        password: 12345678,
+      });
+
+      expect(response.status).toBe(400);
+      expect(UsersModel.findOne).not.toHaveBeenCalled();
+      expect(UsersModel.create).not.toHaveBeenCalled();
+    });
+
     test("rejects an invalid email", async () => {
       const response = await request(app).post("/api/auth/register").send({
         name: "Test User",
@@ -264,6 +304,30 @@ describe("Authentication API", () => {
 
       expect(response.status).toBe(400);
       expect(response.body.message).toBe("Email and password are required.");
+    });
+
+    test("rejects an object as email", async () => {
+      const response = await request(app)
+        .post("/api/auth/login")
+        .send({
+          email: { address: "test@example.com" },
+          password: "password123",
+        });
+
+      expect(response.status).toBe(400);
+      expect(UsersModel.findOne).not.toHaveBeenCalled();
+    });
+
+    test("rejects an array as password", async () => {
+      const response = await request(app)
+        .post("/api/auth/login")
+        .send({
+          email: "test@example.com",
+          password: ["password123"],
+        });
+
+      expect(response.status).toBe(400);
+      expect(UsersModel.findOne).not.toHaveBeenCalled();
     });
 
     test("rejects a request without an email", async () => {

@@ -6,10 +6,38 @@ const HoldingsSchema = new Schema({
     ref: "User",
     required: true,
   },
-  name: String,
-  qty: Number,
-  avg: Number,
-  price: Number,
+  name: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  qty: {
+    type: Number,
+    required: true,
+    min: 1,
+    validate: {
+      validator: Number.isInteger,
+      message: "Quantity must be a positive integer.",
+    },
+  },
+  avg: {
+    type: Number,
+    required: true,
+    min: 0,
+    validate: {
+      validator: (value) => value > 0,
+      message: "Average price must be greater than zero.",
+    },
+  },
+  price: {
+    type: Number,
+    required: true,
+    min: 0,
+    validate: {
+      validator: (value) => value > 0,
+      message: "Price must be greater than zero.",
+    },
+  },
   net: String,
   day: String,
 });

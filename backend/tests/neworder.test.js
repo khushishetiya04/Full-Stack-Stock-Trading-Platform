@@ -71,6 +71,19 @@ describe("New Order API", () => {
     expect(response.status).toBe(401);
   });
 
+  test("rejects an empty request body", async () => {
+    const response = await request(app)
+      .post("/neworder")
+      .set("Cookie", `token=${token}`);
+
+    expect(response.status).toBe(400);
+    expect(response.body).toEqual({
+      message: "Invalid request body.",
+    });
+
+    expect(mongoose.startSession).not.toHaveBeenCalled();
+  });
+
   test("rejects an order with missing fields", async () => {
     const response = await request(app)
       .post("/neworder")
@@ -85,6 +98,25 @@ describe("New Order API", () => {
     expect(response.body).toEqual({
       message: "Please provide a valid stock, quantity, price, and mode.",
     });
+  });
+
+  test("rejects an unsupported stock name", async () => {
+    const response = await request(app)
+      .post("/neworder")
+      .set("Cookie", `token=${token}`)
+      .send({
+        name: "ABCXYZ",
+        qty: 2,
+        price: 100,
+        mode: "BUY",
+      });
+
+    expect(response.status).toBe(400);
+    expect(response.body.message).toBe(
+      "Please provide a valid stock, quantity, price, and mode.",
+    );
+
+    expect(mongoose.startSession).not.toHaveBeenCalled();
   });
 
   test("rejects a non-positive quantity", async () => {

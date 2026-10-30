@@ -186,9 +186,13 @@ describe("New Order API - MongoDB Integration Tests", () => {
 
     expect(successfulOrders).toHaveLength(1);
 
-    expect(
-      responses.every((response) => [201, 400, 500].includes(response.status)),
-    ).toBe(true);
+    expect(responses.map((response) => response.status).sort()).toEqual([
+      201, 400,
+    ]);
+
+    const rejectedOrder = responses.find((response) => response.status === 400);
+
+    expect(rejectedOrder.body.message).toBe("Insufficient funds.");
 
     expect(savedFunds.availableBalance).toBe(200);
 

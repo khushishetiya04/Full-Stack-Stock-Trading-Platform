@@ -37,16 +37,20 @@ app.use("/api/auth", require("./routes/auth"));
 
 app.get("/api/funds", authMiddleware, async (req, res) => {
   try {
-    let funds = await FundsModel.findOne({
-      userId: req.userId,
-    });
-
-    if (!funds) {
-      funds = await FundsModel.create({
-        userId: req.userId,
-        availableBalance: 100000,
-      });
-    }
+    const funds = await FundsModel.findOneAndUpdate(
+      { userId: req.userId },
+      {
+        $setOnInsert: {
+          availableBalance: 100000,
+        },
+      },
+      {
+        new: true,
+        upsert: true,
+        runValidators: true,
+        setDefaultsOnInsert: true,
+      },
+    );
 
     return res.status(200).json({
       availableBalance: funds.availableBalance,
@@ -122,14 +126,20 @@ app.get("/allPositions", authMiddleware, async (req, res) => {
 });
 
 app.post("/neworder", authMiddleware, async (req, res) => {
+  if (!req.body || typeof req.body !== "object" || Array.isArray(req.body)) {
+    return res.status(400).json({
+      message: "Invalid request body.",
+    });
+  }
+  
   const { name, qty, price, mode } = req.body;
-
+  const stockName = typeof name === "string" ? name.trim() : "";
   const quantity = Number(qty);
   const stockPrice = Number(price);
 
   if (
-    !name ||
-    typeof name !== "string" ||
+    !stockName ||
+    !Object.prototype.hasOwnProperty.call(stockPrices, stockName) ||
     !Number.isInteger(quantity) ||
     quantity <= 0 ||
     !Number.isFinite(stockPrice) ||
@@ -155,9 +165,11 @@ app.post("/neworder", authMiddleware, async (req, res) => {
     return error;
   };
 
-  const session = await mongoose.startSession();
+  let session;
 
   try {
+    session = await mongoose.startSession();
+
     let result;
 
     await session.withTransaction(async () => {
@@ -184,7 +196,7 @@ app.post("/neworder", authMiddleware, async (req, res) => {
 
         const existingHolding = await HoldingsModel.findOne({
           userId: req.userId,
-          name,
+          name: stockName,
         }).session(session);
 
         funds.availableBalance -= totalValue;
@@ -206,7 +218,7 @@ app.post("/neworder", authMiddleware, async (req, res) => {
             [
               {
                 userId: req.userId,
-                name,
+                name: stockName,
                 qty: quantity,
                 avg: stockPrice,
                 price: stockPrice,
@@ -222,7 +234,7 @@ app.post("/neworder", authMiddleware, async (req, res) => {
           [
             {
               userId: req.userId,
-              name,
+              name: stockName,
               qty: quantity,
               price: stockPrice,
               mode: "BUY",
@@ -239,7 +251,7 @@ app.post("/neworder", authMiddleware, async (req, res) => {
       } else {
         const existingHolding = await HoldingsModel.findOne({
           userId: req.userId,
-          name,
+          name: stockName,
         }).session(session);
 
         if (!existingHolding || existingHolding.qty < quantity) {
@@ -264,7 +276,7 @@ app.post("/neworder", authMiddleware, async (req, res) => {
           [
             {
               userId: req.userId,
-              name,
+              name: stockName,
               qty: quantity,
               price: stockPrice,
               mode: "SELL",
@@ -295,7 +307,9 @@ app.post("/neworder", authMiddleware, async (req, res) => {
       message: "Unable to place order.",
     });
   } finally {
-    await session.endSession();
+    if (session) {
+      await session.endSession();
+    }
   }
 });
 

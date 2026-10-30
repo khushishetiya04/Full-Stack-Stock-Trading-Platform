@@ -3,8 +3,7 @@ const jwt = require("jsonwebtoken");
 
 jest.mock("../model/FundsModel", () => ({
   FundsModel: {
-    findOne: jest.fn(),
-    create: jest.fn(),
+    findOneAndUpdate: jest.fn(),
   },
 }));
 
@@ -28,11 +27,11 @@ describe("Funds API", () => {
     const response = await request(app).get("/api/funds");
 
     expect(response.status).toBe(401);
-    expect(FundsModel.findOne).not.toHaveBeenCalled();
+    expect(FundsModel.findOneAndUpdate).not.toHaveBeenCalled();
   });
 
   test("returns the existing user's available balance", async () => {
-    FundsModel.findOne.mockResolvedValue({
+    FundsModel.findOneAndUpdate.mockResolvedValue({
       userId: "user123",
       availableBalance: 75000,
     });
@@ -46,17 +45,24 @@ describe("Funds API", () => {
       availableBalance: 75000,
     });
 
-    expect(FundsModel.findOne).toHaveBeenCalledWith({
-      userId: "user123",
-    });
-
-    expect(FundsModel.create).not.toHaveBeenCalled();
+    expect(FundsModel.findOneAndUpdate).toHaveBeenCalledWith(
+      { userId: "user123" },
+      {
+        $setOnInsert: {
+          availableBalance: 100000,
+        },
+      },
+      {
+        new: true,
+        upsert: true,
+        runValidators: true,
+        setDefaultsOnInsert: true,
+      },
+    );
   });
 
   test("creates funds with an initial balance when no record exists", async () => {
-    FundsModel.findOne.mockResolvedValue(null);
-
-    FundsModel.create.mockResolvedValue({
+    FundsModel.findOneAndUpdate.mockResolvedValue({
       userId: "user123",
       availableBalance: 100000,
     });
@@ -70,9 +76,19 @@ describe("Funds API", () => {
       availableBalance: 100000,
     });
 
-    expect(FundsModel.create).toHaveBeenCalledWith({
-      userId: "user123",
-      availableBalance: 100000,
-    });
+    expect(FundsModel.findOneAndUpdate).toHaveBeenCalledWith(
+      { userId: "user123" },
+      {
+        $setOnInsert: {
+          availableBalance: 100000,
+        },
+      },
+      {
+        new: true,
+        upsert: true,
+        runValidators: true,
+        setDefaultsOnInsert: true,
+      },
+    );
   });
 });

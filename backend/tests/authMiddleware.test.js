@@ -72,4 +72,20 @@ describe("Authentication Middleware", () => {
     expect(next).toHaveBeenCalledTimes(1);
     expect(res.status).not.toHaveBeenCalled();
   });
+
+  test("rejects a valid token without a user ID", () => {
+    req.cookies.token = jwt.sign(
+      { email: "test@example.com" },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" },
+    );
+
+    authMiddleware(req, res, next);
+
+    expect(res.status).toHaveBeenCalledWith(401);
+    expect(res.json).toHaveBeenCalledWith({
+      message: "Invalid or expired token. Please log in again.",
+    });
+    expect(next).not.toHaveBeenCalled();
+  });
 });
