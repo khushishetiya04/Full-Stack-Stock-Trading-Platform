@@ -7,6 +7,7 @@ import GeneralContext from "./GeneralContext";
 
 const Funds = () => {
   const [availableBalance, setAvailableBalance] = useState(0);
+  const [allHoldings, setAllHoldings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -17,6 +18,19 @@ const Funds = () => {
 
     setLoading(true);
     setError("");
+
+    axios
+      .get(`${API_URL}/allHoldings`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        if (active) {
+          setAllHoldings(res.data);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching holdings:", error);
+      });
 
     axios
       .get(`${API_URL}/api/funds`, {
@@ -46,6 +60,16 @@ const Funds = () => {
   }, [refreshVersion]);
 
   const formattedBalance = availableBalance.toLocaleString("en-IN", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+
+  const marginsUsed = allHoldings.reduce(
+    (total, stock) => total + Number(stock.avg) * Number(stock.qty),
+    0,
+  );
+
+  const formattedMarginsUsed = marginsUsed.toLocaleString("en-IN", {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   });
@@ -84,7 +108,7 @@ const Funds = () => {
 
             <div className="data">
               <p>Used margin</p>
-              <p className="imp">0.00</p>
+              <p className="imp">{formattedMarginsUsed}</p>
             </div>
 
             <div className="data">

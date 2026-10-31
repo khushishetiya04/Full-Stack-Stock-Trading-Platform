@@ -6,18 +6,21 @@ import API_URL from "./api";
 function ProtectedDashboard({ children }) {
   const [checkingSession, setCheckingSession] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const checkSession = async () => {
       try {
-        await axios.get(`${API_URL}/api/auth/me`, {
+        const response = await axios.get(`${API_URL}/api/auth/me`, {
           withCredentials: true,
         });
 
+        setUser(response.data.user);
         setIsAuthenticated(true);
       } catch (error) {
         console.log("Session check failed:", error.response?.status);
         setIsAuthenticated(false);
+
         window.location.replace(
           process.env.REACT_APP_LOGIN_URL || "http://localhost:3000/login",
         );
@@ -37,7 +40,7 @@ function ProtectedDashboard({ children }) {
     return null;
   }
 
-  return children;
+  return React.cloneElement(children, { user });
 }
 
 export default ProtectedDashboard;

@@ -8,6 +8,8 @@ const Summary = () => {
   const [userName, setUserName] = useState("");
   const [allHoldings, setAllHoldings] = useState([]);
   const [availableBalance, setAvailableBalance] = useState(0);
+  const [portfolioLoading, setPortfolioLoading] = useState(true);
+  const [portfolioError, setPortfolioError] = useState("");
 
   const { refreshVersion } = useContext(GeneralContext);
 
@@ -27,28 +29,44 @@ const Summary = () => {
   }, []);
 
   useEffect(() => {
-    axios
-      .get(`${API_URL}/allHoldings`, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        setAllHoldings(res.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching holdings:", error);
-      });
+    let active = true;
 
-    axios
-      .get(`${API_URL}/api/funds`, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        const balance = Number(res.data.availableBalance) || 0;
-        setAvailableBalance(balance);
-      })
-      .catch((error) => {
-        console.error("Error fetching funds:", error);
-      });
+    const fetchPortfolio = async () => {
+      setPortfolioLoading(true);
+      setPortfolioError("");
+
+      try {
+        const [holdingsRes, fundsRes] = await Promise.all([
+          axios.get(`${API_URL}/allHoldings`, {
+            withCredentials: true,
+          }),
+          axios.get(`${API_URL}/api/funds`, {
+            withCredentials: true,
+          }),
+        ]);
+
+        if (active) {
+          setAllHoldings(holdingsRes.data);
+          setAvailableBalance(Number(fundsRes.data.availableBalance) || 0);
+        }
+      } catch (error) {
+        console.error("Error fetching portfolio:", error);
+
+        if (active) {
+          setPortfolioError("Unable to load portfolio data. Please try again.");
+        }
+      } finally {
+        if (active) {
+          setPortfolioLoading(false);
+        }
+      }
+    };
+
+    fetchPortfolio();
+
+    return () => {
+      active = false;
+    };
   }, [refreshVersion]);
 
   const totalInvestment = allHoldings.reduce(
@@ -92,6 +110,18 @@ const Summary = () => {
 
     return formatAmount(amount);
   };
+
+  if (portfolioLoading) {
+    return <p>Loading portfolio...</p>;
+  }
+
+  if (portfolioError) {
+    return (
+      <p role="alert" className="text-danger">
+        {portfolioError}
+      </p>
+    );
+  }
 
   return (
     <>

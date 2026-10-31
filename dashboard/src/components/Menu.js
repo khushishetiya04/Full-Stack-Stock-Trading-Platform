@@ -1,30 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 
+import GeneralContext from "./GeneralContext";
 import API_URL from "../api";
 
 const Menu = () => {
   const location = useLocation();
 
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await axios.get(`${API_URL}/api/auth/me`, {
-          withCredentials: true,
-        });
-
-        setUser(response.data.user);
-      } catch (error) {
-        console.error("Error fetching user profile:", error);
-      }
-    };
-
-    fetchUser();
-  }, []);
+  
+  const { user } = useContext(GeneralContext);
 
   const handleLogout = async () => {
     try {

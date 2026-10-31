@@ -12,7 +12,7 @@ const GeneralContext = React.createContext({
   refreshData: () => {},
 });
 
-export const GeneralContextProvider = (props) => {
+export const GeneralContextProvider = ({ children, user }) => {
   const [isBuyWindowOpen, setIsBuyWindowOpen] = useState(false);
   const [isSellWindowOpen, setIsSellWindowOpen] = useState(false);
   const [selectedStockUID, setSelectedStockUID] = useState("");
@@ -47,6 +47,7 @@ export const GeneralContextProvider = (props) => {
   return (
     <GeneralContext.Provider
       value={{
+        user,
         openBuyWindow: handleOpenBuyWindow,
         closeBuyWindow: handleCloseBuyWindow,
         openSellWindow: handleOpenSellWindow,
@@ -55,7 +56,7 @@ export const GeneralContextProvider = (props) => {
         refreshData,
       }}
     >
-      {props.children}
+      {children}
 
       {isBuyWindowOpen && <BuyActionWindow uid={selectedStockUID} />}
 
