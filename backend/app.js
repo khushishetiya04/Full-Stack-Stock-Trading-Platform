@@ -15,9 +15,6 @@ const stockPrices = require("./data/stockPrices");
 
 const authMiddleware = require("./middleware/authMiddleware");
 
-const PORT = process.env.PORT || 3002;
-const uri = process.env.MONGO_URL;
-
 const app = express();
 
 const allowedOrigins = [
@@ -131,7 +128,7 @@ app.post("/neworder", authMiddleware, async (req, res) => {
       message: "Invalid request body.",
     });
   }
-  
+
   const { name, qty, price, mode } = req.body;
   const stockName = typeof name === "string" ? name.trim() : "";
   const quantity = Number(qty);

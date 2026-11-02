@@ -1,4 +1,5 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -55,17 +56,37 @@ router.post("/register", async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    const user = await UsersModel.create({
-      name: normalizedName,
-      email: normalizedEmail,
-      password: hashedPassword,
-    });
+    const session = await mongoose.startSession();
+    let user;
 
-    await FundsModel.create({
-      userId: user._id,
-      availableBalance: 100000,
-    });
+    try {
+      await session.withTransaction(async () => {
+        const createdUsers = await UsersModel.create(
+          [
+            {
+              name: normalizedName,
+              email: normalizedEmail,
+              password: hashedPassword,
+            },
+          ],
+          { session },
+        );
 
+        user = createdUsers[0];
+
+        await FundsModel.create(
+          [
+            {
+              userId: user._id,
+              availableBalance: 100000,
+            },
+          ],
+          { session },
+        );
+      });
+    } finally {
+      await session.endSession();
+    }
     return res.status(201).json({
       message: "Registration successful.",
       user: {

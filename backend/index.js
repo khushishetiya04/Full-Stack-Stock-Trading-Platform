@@ -6,6 +6,11 @@ const app = require("./app");
 const PORT = process.env.PORT || 3002;
 const uri = process.env.MONGO_URL;
 
+if (!uri) {
+  console.error("MONGO_URL is missing from environment variables.");
+  process.exit(1);
+}
+
 mongoose
   .connect(uri)
   .then(() => {

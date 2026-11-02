@@ -41,7 +41,7 @@ describe("Funds Component", () => {
     renderFunds();
 
     expect(
-      await screen.findByText("Instant, zero-cost fund transfers with UPI"),
+      await screen.findByText("Manage your simulated trading funds"),
     ).toBeInTheDocument();
 
     expect(screen.getByText("Equity")).toBeInTheDocument();

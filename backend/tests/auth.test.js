@@ -1,6 +1,7 @@
 const request = require("supertest");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const mongoose = require("mongoose");
 
 jest.mock("../model/UsersModel", () => ({
   UsersModel: {
@@ -15,6 +16,13 @@ jest.mock("../model/FundsModel", () => ({
     create: jest.fn(),
   },
 }));
+
+const mockSession = {
+  withTransaction: jest.fn(async (callback) => callback()),
+  endSession: jest.fn().mockResolvedValue(undefined),
+};
+
+jest.spyOn(mongoose, "startSession").mockResolvedValue(mockSession);
 
 const app = require("../app");
 const { UsersModel } = require("../model/UsersModel");
@@ -232,15 +240,19 @@ describe("Authentication API", () => {
     test("registers a user and creates initial funds", async () => {
       UsersModel.findOne.mockResolvedValue(null);
 
-      UsersModel.create.mockImplementation(async (data) => ({
-        _id: "new-user",
-        ...data,
-      }));
+      UsersModel.create.mockImplementation(async ([data]) => [
+        {
+          _id: "new-user",
+          ...data,
+        },
+      ]);
 
-      FundsModel.create.mockResolvedValue({
-        userId: "new-user",
-        availableBalance: 100000,
-      });
+      FundsModel.create.mockResolvedValue([
+        {
+          userId: "new-user",
+          availableBalance: 100000,
+        },
+      ]);
 
       const response = await request(app).post("/api/auth/register").send({
         name: " Test User ",
@@ -250,31 +262,47 @@ describe("Authentication API", () => {
 
       expect(response.status).toBe(201);
       expect(response.body.message).toBe("Registration successful.");
+
       expect(response.body.user).toEqual({
         id: "new-user",
         name: "Test User",
         email: "test@example.com",
       });
 
+      expect(mongoose.startSession).toHaveBeenCalled();
+
+      expect(mockSession.withTransaction).toHaveBeenCalled();
+
       expect(UsersModel.create).toHaveBeenCalledWith(
-        expect.objectContaining({
-          name: "Test User",
-          email: "test@example.com",
-          password: expect.any(String),
-        }),
+        [
+          expect.objectContaining({
+            name: "Test User",
+            email: "test@example.com",
+            password: expect.any(String),
+          }),
+        ],
+        { session: mockSession },
       );
 
-      const savedUser = UsersModel.create.mock.calls[0][0];
+      const savedUser = UsersModel.create.mock.calls[0][0][0];
 
       expect(savedUser.password).not.toBe("password123");
+
       expect(await bcrypt.compare("password123", savedUser.password)).toBe(
         true,
       );
 
-      expect(FundsModel.create).toHaveBeenCalledWith({
-        userId: "new-user",
-        availableBalance: 100000,
-      });
+      expect(FundsModel.create).toHaveBeenCalledWith(
+        [
+          {
+            userId: "new-user",
+            availableBalance: 100000,
+          },
+        ],
+        { session: mockSession },
+      );
+
+      expect(mockSession.endSession).toHaveBeenCalled();
     });
 
     test("returns 409 for a duplicate-key database error", async () => {
