@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 
 import Apps from "./Apps";
 import Funds from "./Funds";
@@ -10,8 +10,15 @@ import Summary from "./Summary";
 import WatchList from "./WatchList";
 
 const Dashboard = () => {
+  const location = useLocation();
+  const isHome = location.pathname === "/";
+
   return (
-    <div className="dashboard-container">
+    <div
+      className={`dashboard-container ${
+        isHome ? "dashboard-home" : "dashboard-page"
+      }`}
+    >
       <WatchList />
 
       <div className="content">

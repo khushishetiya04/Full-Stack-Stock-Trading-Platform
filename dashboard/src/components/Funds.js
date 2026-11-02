@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 
 import API_URL from "../api";
@@ -10,49 +9,53 @@ const Funds = () => {
   const [allHoldings, setAllHoldings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [holdingsError, setHoldingsError] = useState("");
 
   const { refreshVersion } = useContext(GeneralContext);
 
   useEffect(() => {
     let active = true;
 
-    setLoading(true);
-    setError("");
+    const fetchFundsData = async () => {
+      setLoading(true);
+      setError("");
+      setHoldingsError("");
 
-    axios
-      .get(`${API_URL}/allHoldings`, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        if (active) {
-          setAllHoldings(res.data);
+      try {
+        const [holdingsResult, fundsResult] = await Promise.allSettled([
+          axios.get(`${API_URL}/allHoldings`, {
+            withCredentials: true,
+          }),
+          axios.get(`${API_URL}/api/funds`, {
+            withCredentials: true,
+          }),
+        ]);
+
+        if (!active) return;
+
+        if (holdingsResult.status === "fulfilled") {
+          setAllHoldings(holdingsResult.value.data);
+        } else {
+          console.error("Error fetching holdings:", holdingsResult.reason);
+          setHoldingsError("Unable to load used margin.");
         }
-      })
-      .catch((error) => {
-        console.error("Error fetching holdings:", error);
-      });
 
-    axios
-      .get(`${API_URL}/api/funds`, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        if (active) {
-          setAvailableBalance(Number(res.data.availableBalance) || 0);
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching funds:", error);
-
-        if (active) {
+        if (fundsResult.status === "fulfilled") {
+          setAvailableBalance(
+            Number(fundsResult.value.data.availableBalance) || 0,
+          );
+        } else {
+          console.error("Error fetching funds:", fundsResult.reason);
           setError("Unable to load funds. Please try again.");
         }
-      })
-      .finally(() => {
+      } finally {
         if (active) {
           setLoading(false);
         }
-      });
+      }
+    };
+
+    fetchFundsData();
 
     return () => {
       active = false;
@@ -90,8 +93,14 @@ const Funds = () => {
     <>
       <div className="funds">
         <p>Instant, zero-cost fund transfers with UPI</p>
-        <Link className="btn btn-green">Add funds</Link>
-        <Link className="btn btn-blue">Withdraw</Link>
+
+        <button type="button" className="btn btn-green" disabled>
+          Add funds
+        </button>
+
+        <button type="button" className="btn btn-blue" disabled>
+          Withdraw
+        </button>
       </div>
 
       <div className="row">
@@ -108,7 +117,7 @@ const Funds = () => {
 
             <div className="data">
               <p>Used margin</p>
-              <p className="imp">{formattedMarginsUsed}</p>
+              <p className="imp">{holdingsError || formattedMarginsUsed}</p>
             </div>
 
             <div className="data">
@@ -170,7 +179,10 @@ const Funds = () => {
         <div className="col">
           <div className="commodity">
             <p>You don't have a commodity account</p>
-            <Link className="btn btn-blue">Open Account</Link>
+
+            <button type="button" className="btn btn-blue" disabled>
+              Open Account
+            </button>
           </div>
         </div>
       </div>

@@ -840,3 +840,201 @@ hr {
   background: #f5f5f5;
   color: #df5b2b;
 }
+
+.trading-disclaimer {
+  width: 100%;
+  padding: 9px 16px;
+  background-color: #fff3cd;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.trading-disclaimer p {
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+/* Tablet responsiveness */
+@media (max-width: 1024px) {
+  .menu-container {
+    padding: 10px 12px;
+  }
+
+  .menus li {
+    margin-right: 14px;
+  }
+
+  .indices-container {
+    padding: 10px 8px;
+  }
+
+  .nifty > *,
+  .sensex > * {
+    margin-right: 4px;
+  }
+
+  .index,
+  .index-points,
+  .percent {
+    font-size: 0.7rem;
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  /* Top navigation */
+  .topbar-container {
+    height: auto;
+    flex-wrap: wrap;
+  }
+
+  .indices-container {
+    flex: 0 0 100%;
+    height: 55px;
+    border-right: none;
+    border-bottom: 1px solid rgb(224, 224, 224);
+  }
+
+  .menu-container {
+    flex: 0 0 100%;
+    height: auto;
+    min-height: 65px;
+    padding: 10px 12px;
+    gap: 10px;
+  }
+
+  .menus {
+    flex: 1;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .menus ul {
+    padding-left: 0;
+    margin: 8px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 8px 12px;
+  }
+
+  .menus li {
+    margin-right: 0;
+  }
+
+  .menu {
+    font-size: 0.75rem;
+  }
+
+  .profile {
+    margin-left: 8px;
+  }
+
+  .profile .username {
+    max-width: 90px;
+    overflow-wrap: anywhere;
+  }
+
+  /* Dashboard layout */
+  .dashboard-container {
+    height: auto;
+    min-height: 90vh;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  /* Dashboard mobile layout */
+  .dashboard-home .watchlist-container {
+    display: block;
+    order: 1;
+    flex: none;
+    width: 100%;
+    height: auto;
+    max-height: none;
+    overflow-y: visible;
+  }
+
+  .dashboard-home .content {
+    order: 2;
+  }
+
+  /* Other pages: hide Watchlist on mobile */
+  .dashboard-page .watchlist-container {
+    display: none;
+  }
+
+  .dashboard-page .content {
+    order: 1;
+    width: 100%;
+  }
+
+  .content {
+    flex: none;
+    width: 100%;
+    height: auto;
+    min-height: 60vh;
+    overflow-x: auto;
+    overflow-y: visible;
+    padding: 20px 16px;
+  }
+
+  /* Funds and summary columns */
+  .row {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .col {
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+
+  .funds {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .funds p {
+    width: 100%;
+  }
+
+  /* Tables */
+  .order-table {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  .order-table table {
+    min-width: 600px;
+  }
+
+  .data {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .orders {
+    height: auto;
+    min-height: 60vh;
+  }
+
+  .holdings-chart {
+    position: relative;
+    width: 100%;
+    height: 300px;
+  }
+}
+
+.btn.btn-green:disabled,
+.btn.btn-blue:disabled {
+  background-color: #e0e0e0;
+  border-color: #d0d0d0;
+  color: #777;
+  opacity: 1;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.btn:disabled:hover {
+  background-color: #e0e0e0;
+}

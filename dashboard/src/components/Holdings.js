@@ -163,7 +163,9 @@ const Holdings = () => {
         </div>
       </div>
 
-      <VerticalGraph data={data} />
+      <div className="holdings-chart">
+        <VerticalGraph data={data} />
+      </div>
     </>
   );
 };

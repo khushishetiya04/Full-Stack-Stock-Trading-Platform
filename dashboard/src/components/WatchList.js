@@ -58,10 +58,6 @@ const WatchList = () => {
 
   return (
     <div className="watchlist-container">
-      <p>
-        Simulated trading platform. Prices are for demonstration only. Orders
-        execute at user-entered prices.
-      </p>
       <div className="search-container">
         <input
           type="text"

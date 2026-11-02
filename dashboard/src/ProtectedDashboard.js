@@ -7,33 +7,55 @@ function ProtectedDashboard({ children }) {
   const [checkingSession, setCheckingSession] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
+  const [error, setError] = useState("");
 
   useEffect(() => {
+    const controller = new AbortController();
+
     const checkSession = async () => {
       try {
         const response = await axios.get(`${API_URL}/api/auth/me`, {
           withCredentials: true,
+          signal: controller.signal,
         });
 
         setUser(response.data.user);
         setIsAuthenticated(true);
       } catch (error) {
-        console.log("Session check failed:", error.response?.status);
-        setIsAuthenticated(false);
+        if (axios.isCancel(error)) {
+          return;
+        }
 
-        window.location.replace(
-          process.env.REACT_APP_LOGIN_URL || "http://localhost:3000/login",
-        );
+        if (error.response?.status === 401) {
+          window.location.replace(
+            process.env.REACT_APP_LOGIN_URL || "http://localhost:3000/login",
+          );
+          return;
+        }
+
+        console.error("Session check failed:", error);
+
+        setError("Unable to verify your session. Please try again.");
       } finally {
-        setCheckingSession(false);
+        if (!controller.signal.aborted) {
+          setCheckingSession(false);
+        }
       }
     };
 
     checkSession();
+
+    return () => {
+      controller.abort();
+    };
   }, []);
 
   if (checkingSession) {
     return <p>Checking login...</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
   }
 
   if (!isAuthenticated) {

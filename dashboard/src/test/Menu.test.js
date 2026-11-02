@@ -6,6 +6,7 @@ import { MemoryRouter, useLocation } from "react-router-dom";
 
 import API_URL from "../api";
 import Menu from "../components/Menu";
+import GeneralContext from "../components/GeneralContext";
 
 jest.mock("axios");
 
@@ -17,19 +18,18 @@ const LocationDisplay = () => {
 describe("Menu Component", () => {
   beforeEach(() => {
     jest.clearAllMocks();
-
-    axios.get.mockResolvedValue({
-      data: {
-        user: { name: "Khushi Shetiya" },
-      },
-    });
   });
 
-  const renderMenu = (initialEntry = "/") => {
+  const renderMenu = (
+    initialEntry = "/",
+    user = { name: "Khushi Shetiya" },
+  ) => {
     return render(
       <MemoryRouter initialEntries={[initialEntry]}>
-        <Menu />
-        <LocationDisplay />
+        <GeneralContext.Provider value={{ user }}>
+          <Menu />
+          <LocationDisplay />
+        </GeneralContext.Provider>
       </MemoryRouter>,
     );
   };
@@ -46,44 +46,17 @@ describe("Menu Component", () => {
     );
   });
 
-  test("fetches the user profile with credentials", async () => {
-    renderMenu();
-
-    await waitFor(() => {
-      expect(axios.get).toHaveBeenCalledWith(`${API_URL}/api/auth/me`, {
-        withCredentials: true,
-      });
-    });
-
-    expect(await screen.findByText("Khushi Shetiya")).toBeInTheDocument();
-  });
-
   test("displays the user's initials", async () => {
     renderMenu();
 
     expect(await screen.findByText("KS")).toBeInTheDocument();
   });
 
-  test("displays User when the profile request fails", async () => {
-    axios.get.mockRejectedValue(new Error("Network error"));
+  test("displays User when no user is available", () => {
+    renderMenu("/", null);
 
-    const consoleError = jest
-      .spyOn(console, "error")
-      .mockImplementation(() => {});
-
-    renderMenu();
-
-    expect(await screen.findByText("User")).toBeInTheDocument();
+    expect(screen.getByText("User")).toBeInTheDocument();
     expect(screen.getByText("U")).toBeInTheDocument();
-
-    await waitFor(() => {
-      expect(consoleError).toHaveBeenCalledWith(
-        "Error fetching user profile:",
-        expect.any(Error),
-      );
-    });
-
-    consoleError.mockRestore();
   });
 
   test("highlights the active menu item", () => {
