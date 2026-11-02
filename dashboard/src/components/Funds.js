@@ -92,7 +92,7 @@ const Funds = () => {
   return (
     <>
       <div className="funds">
-        <p>Instant, zero-cost fund transfers with UPI</p>
+        <p>Manage your simulated trading funds</p>
 
         <button type="button" className="btn btn-green" disabled>
           Add funds
