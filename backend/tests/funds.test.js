@@ -53,7 +53,7 @@ describe("Funds API", () => {
         },
       },
       {
-        new: true,
+        returnDocument: "after",
         upsert: true,
         runValidators: true,
         setDefaultsOnInsert: true,
@@ -84,7 +84,7 @@ describe("Funds API", () => {
         },
       },
       {
-        new: true,
+        returnDocument: "after" ,
         upsert: true,
         runValidators: true,
         setDefaultsOnInsert: true,

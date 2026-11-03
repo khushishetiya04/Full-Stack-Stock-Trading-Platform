@@ -42,7 +42,7 @@ app.get("/api/funds", authMiddleware, async (req, res) => {
         },
       },
       {
-        new: true,
+        returnDocument: "after" ,
         upsert: true,
         runValidators: true,
         setDefaultsOnInsert: true,
