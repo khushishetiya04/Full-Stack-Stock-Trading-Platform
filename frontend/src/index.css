@@ -203,3 +203,38 @@ a.footer-link:hover {
     padding: 0.5rem;
   }
 }
+
+/* =================================
+   RESPONSIVE DESIGN - SUPPORT PAGE
+   ================================= */
+
+@media (max-width: 767.98px) {
+  /* Support Hero */
+  .container-fluid.py-5.mb-5
+    > .container-fluid.px-3
+    > .row.align-items-center
+    > .col-6 {
+    width: 100%;
+  }
+
+  .container-fluid.py-5.mb-5 > .container-fluid.px-3 > .row.align-items-center {
+    row-gap: 1rem;
+  }
+
+  /* Ticket categories and sidebar */
+  .container > .row.mt-5.mb-5 > .col-8,
+  .container > .row.mt-5.mb-5 > .col-4 {
+    width: 100%;
+  }
+
+  /* Remove sidebar's left padding */
+  .container > .row.mt-5.mb-5 > .col-4.ps-5 {
+    padding-left: 12px !important;
+    margin-top: 1.5rem;
+  }
+
+  /* Accordion content spacing */
+  .container > .row.mt-5.mb-5 .collapse > .border-top.px-5.py-4 {
+    padding: 1rem !important;
+  }
+}
