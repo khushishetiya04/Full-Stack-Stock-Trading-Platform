@@ -25,3 +25,181 @@ code {
 a.footer-link:hover {
   color: #387ed1;
 }
+
+/* =================================
+   RESPONSIVE DESIGN - NAVBAR
+   ================================= */
+
+@media (max-width: 991.98px) {
+  .navbar .nav-link {
+    margin-left: 0;
+    padding: 10px 0;
+  }
+}
+
+/* =================================
+   RESPONSIVE DESIGN - HOME PAGE
+   ================================= */
+
+@media (max-width: 767.98px) {
+  /* Home Hero */
+  .container.p-5.mb-5 {
+    padding: 2rem 1rem !important;
+  }
+
+  /* Awards and Stats: stack columns */
+  .container .row > .col-6 {
+    width: 100%;
+  }
+
+  .container .row > .col-6.p-5 {
+    padding: 1.5rem !important;
+  }
+
+  .container .row > .col-6.p-5.mt-5 {
+    margin-top: 0 !important;
+  }
+
+  /* Home page images */
+  .container .row > .col-6 img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Footer: two columns */
+  footer .row > .col {
+    width: 50%;
+    flex: 0 0 50%;
+    margin-bottom: 1.5rem;
+  }
+
+  footer .text-center {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  footer .text-center .ms-3 {
+    margin-left: 0 !important;
+  }
+}
+
+@media (max-width: 575.98px) {
+  /* Hero signup button */
+  .container.p-5.mb-5 .btn-primary {
+    width: 60% !important;
+  }
+
+  /* Footer: one column on very narrow screens */
+  footer .row > .col {
+    width: 100%;
+    flex: 0 0 100%;
+  }
+}
+
+/* =================================
+   RESPONSIVE DESIGN - ABOUT PAGE
+   ================================= */
+
+@media (max-width: 767.98px) {
+  /* About page heading */
+  .container > .row.p-5.mt-5.mb-5 {
+    padding: 1.5rem !important;
+    margin-top: 1.5rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  /* About page description sections */
+  .container > .row.p-5.mt-5.border-top {
+    padding: 1rem !important;
+    margin-top: 1.5rem !important;
+    font-size: 1rem !important;
+  }
+
+  /* Founder section */
+  .container > .row.p-3.text-muted {
+    font-size: 1rem !important;
+  }
+
+  .container > .row.p-3.mt-5.border-top {
+    margin-top: 2rem !important;
+  }
+}
+
+/* =================================
+   RESPONSIVE DESIGN - PRODUCTS PAGE
+   ================================= */
+
+@media (max-width: 767.98px) {
+  /* Product image and content sections */
+  .container.mt-5 > .row.align-items-center > .col-6 {
+    width: 100%;
+  }
+
+  /* Reduce content padding */
+  .container.mt-5 > .row.align-items-center > .col-6.p-5.mt-5 {
+    padding: 1.5rem !important;
+    margin-top: 0 !important;
+  }
+
+  /* Product images */
+  .container.mt-5 > .row.align-items-center > .col-6 img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Product links */
+  .container.mt-5 > .row.align-items-center .ms-5 {
+    margin-left: 1rem !important;
+  }
+
+  /* App store badges */
+  .container.mt-5 > .row.align-items-center .mt-3 img {
+    max-width: 45%;
+    height: auto;
+  }
+}
+
+/* =================================
+   RESPONSIVE DESIGN - PRICING PAGE
+   ================================= */
+
+@media (max-width: 767.98px) {
+  /* Pricing hero: stack the three sections */
+  .container > .row.p-5.mt-3.text-center > .col-4 {
+    width: 100%;
+  }
+
+  /* Reduce spacing around pricing sections */
+  .container > .row.p-5.mt-3.text-center {
+    padding: 1rem !important;
+  }
+
+  /* Pricing illustrations */
+  .container > .row.p-5.mt-3.text-center img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Allow charge tables to scroll horizontally */
+  .container.mt-5 .mt-4:has(> .row.border-start) {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .container.mt-5 .mt-4:has(> .row.border-start) > .row {
+    min-width: 760px;
+    flex-wrap: nowrap;
+  }
+
+  .container.mt-5 .mt-4:has(> .row.border-start) > .row > div {
+    flex-shrink: 0;
+  }
+
+  /* Charges tabs */
+  .container.mt-5 > .row.mb-5 > .col > .btn {
+    padding: 0.5rem;
+  }
+}

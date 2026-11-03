@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 function Pricing() {
   return (
-    <div className="container">
-      <div className="row">
+    <div className="container p-3">
+      <div className="row p-5">
         <div className="col-4">
           <h1 className="mb-3 fs-2">Transparent Pricing</h1>
           <p>
