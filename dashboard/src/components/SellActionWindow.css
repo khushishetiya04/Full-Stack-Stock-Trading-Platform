@@ -113,3 +113,46 @@
 #sell-window .text-danger {
   font-size: 0.85rem;
 }
+
+@media (max-width: 768px) {
+  #sell-window.container {
+    position: fixed;
+    width: calc(100% - 24px);
+    height: auto;
+    max-height: 85vh;
+    overflow-y: auto;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    top: auto;
+    z-index: 1000;
+  }
+
+  #sell-window .regular-order {
+    padding: 16px;
+  }
+
+  #sell-window .inputs {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  #sell-window .inputs fieldset {
+    flex: 1;
+    min-width: 0;
+    margin-right: 0;
+  }
+
+  #sell-window .inputs fieldset input {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  #sell-window .buttons {
+    top: auto;
+    padding: 12px 0;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+}
+

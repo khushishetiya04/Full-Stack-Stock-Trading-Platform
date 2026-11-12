@@ -218,4 +218,49 @@
     background: #9b9b9b;
     color: #fff;
   }
-  
+ 
+  @media (max-width: 768px) {
+  .container {
+    position: fixed;
+    width: calc(100% - 24px);
+    height: auto;
+    max-height: 85vh;
+    overflow-y: auto;
+    left: 12px;
+    bottom: 12px;
+    top: auto;
+    z-index: 1000;
+    cursor: default;
+  }
+
+  .regular-order {
+    padding: 16px;
+  }
+
+  .order-validity {
+    width: 100%;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .inputs {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .inputs fieldset {
+    flex: 1;
+    min-width: 0;
+    margin-right: 0;
+  }
+
+  .inputs fieldset input {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .buttons {
+    top: auto;
+    padding: 12px 0;
+  }
+}
